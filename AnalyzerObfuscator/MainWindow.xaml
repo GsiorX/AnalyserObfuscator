@@ -26,8 +26,9 @@
                 <RadioButton Margin="41,1,0,10" Content="Obfuscate" Name="Obfuscate"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
-                <Button Content="Next"/>
+                <Button x:Name="next" Content="Next" Click="next_Click"/>
             </WrapPanel>
+            <TextBox x:Name="result" Text="" TextWrapping="Wrap" Width="100"/>
         </DockPanel>
     </Grid>
 </Window>

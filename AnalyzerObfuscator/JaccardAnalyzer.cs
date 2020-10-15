@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace AnalyzerObfuscator
 {
-    class JaccardAnalyzer
+    class JaccardAnalyzer : TextAnalyzer
     {
         public double AnalyzeText(string text, string obs)
         {

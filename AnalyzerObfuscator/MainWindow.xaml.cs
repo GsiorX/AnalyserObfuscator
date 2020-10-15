@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -22,6 +23,9 @@ namespace AnalyzerObfuscator
     /// </summary>
     public partial class MainWindow : Window
     {
+        string documentName;
+        string obfDocumentName;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,10 +39,10 @@ namespace AnalyzerObfuscator
 
             if(result == true)
             {
-                string fileName = openFileDialog.FileName;
+                documentName = openFileDialog.FileName;
 
                 //Info dla użytkownika
-                file1.Text = fileName.Split("\\").Last();
+                file1.Text = documentName.Split("\\").Last();
             }
         }
 
@@ -50,11 +54,29 @@ namespace AnalyzerObfuscator
 
             if (result == true)
             {
-                string fileName = openFileDialog.FileName;
+                obfDocumentName = openFileDialog.FileName;
 
                 //Info dla użytkownika
-                file2.Text = fileName.Split("\\").Last();
+                file2.Text = obfDocumentName.Split("\\").Last();
             }
+        }
+
+        private static FlowDocument SetRTF(string filePath)
+        {
+            FileStream xamlFile = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            // StringReader stringReader = new StringReader(xamlString);
+            System.Xml.XmlReader xmlReader = System.Xml.XmlReader.Create(xamlFile);
+            return XamlReader.Load(xmlReader) as FlowDocument;
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            Analyzer analyzer = new Analyzer();
+            FlowDocument document = SetRTF(documentName);
+            FlowDocument obfDocument = SetRTF(obfDocumentName);
+
+            (double, double, double) res = analyzer.AnalyzeDocuments(document, obfDocument);
+            result.Text = res.Item1.ToString();
         }
     }
 }
