@@ -22,7 +22,7 @@
                 <TextBox TextWrapping="Wrap" Width="120" Name="file2"/>
             </WrapPanel>
             <WrapPanel DockPanel.Dock="Top">
-                <RadioButton Margin="41,1,0,10" Content="Analyze" Name="Analyze"/>
+                <RadioButton Margin="41,1,0,10" Content="Analyse" Name="Analyse"/>
                 <RadioButton Margin="41,1,0,10" Content="Obfuscate" Name="Obfuscate"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
