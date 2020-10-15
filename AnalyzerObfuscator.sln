@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerObfuscator", "AnalyzerObfuscator\AnalyzerObfuscator.csproj", "{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3804245B-29F3-4DFB-B845-323FDF6B87B8}
+	EndGlobalSection
+EndGlobal
