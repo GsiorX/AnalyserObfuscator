@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyzerObfuscator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="248" Width="314">
+        Title="MainWindow" Height="300" Width="314">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="199*"/>
+            <ColumnDefinition Width="115*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" Margin="50,62,0,0" Height="16"><Run Language="pl-pl" Text="Select files"/></TextBlock>
-        <DockPanel Margin="10,10,10,10" Grid.ColumnSpan="2">
+        <DockPanel Margin="10,0,10,20" Grid.ColumnSpan="2">
             <WrapPanel HorizontalAlignment="Left" DockPanel.Dock="Top" Margin="41,80,0,10">
                 <Button Name="btnOpenFile" Click="btnOpenFile_Click">Open file 1</Button>
                 <TextBlock TextWrapping="Wrap" Width="120" Name="file1"/>
@@ -22,13 +23,14 @@
                 <TextBlock TextWrapping="Wrap" Width="120" Name="file2"/>
             </WrapPanel>
             <WrapPanel DockPanel.Dock="Top">
-                <RadioButton Margin="41,1,0,10" Content="Analyse" Name="Analyse"/>
-                <RadioButton Margin="41,1,0,10" Content="Obfuscate" Name="Obfuscate"/>
+                <RadioButton Margin="41,1,0,10" Content="Analyse" Name="Analyse" IsChecked="True"/>
+                <RadioButton Margin="41,1,0,10" Content="Obfuscate" Name="Obfuscate" IsEnabled="False"/>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
                 <Button x:Name="next" Content="Next" Click="next_Click"/>
             </WrapPanel>
-            <TextBox x:Name="result" Text="" TextWrapping="Wrap" Width="100"/>
+            <TextBlock Text="Jaccart result:" TextWrapping="Wrap" Width="80"/>
+            <TextBox x:Name="result" Text="" TextWrapping="Wrap" DockPanel.Dock="Right" Width="100"/>
         </DockPanel>
     </Grid>
 </Window>
