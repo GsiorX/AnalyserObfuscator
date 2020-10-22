@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AnalyzerObfuscator"
         mc:Ignorable="d"
         Title="ResultWindow" Height="450" Width="800">
-    <Grid x:Name="resultsGrid">
+    <Grid x:Name="resultsGrid" Margin="10, 10, 10, 10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="8*"/>
@@ -23,6 +23,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"><Run Language="pl-pl" Text="Test"/></TextBlock>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">Wyniki analizy</TextBlock>
     </Grid>
 </Window>
