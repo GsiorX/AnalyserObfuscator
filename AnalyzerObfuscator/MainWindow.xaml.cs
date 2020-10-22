@@ -75,13 +75,33 @@ namespace AnalyzerObfuscator
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
-            FlowDocument document = SetRTF(documentName);
-            FlowDocument obfDocument = SetRTF(obfDocumentName);
+            if (analyseBtn.IsChecked == true)
+            {
+                FlowDocument document = SetRTF(documentName);
+                FlowDocument obfDocument = SetRTF(obfDocumentName);
 
-            ResultWindow resultWindow = new ResultWindow(document, obfDocument);
-            resultWindow.Show();
+                ResultWindow resultWindow = new ResultWindow(document, obfDocument);
+                resultWindow.Show();
+            }
 
-            this.Close();
+            if (obfuscateBtn.IsChecked == true)
+            {
+                FlowDocument document = SetRTF(documentName);
+
+                ObfuscationResultWindow resultWindow = new ObfuscationResultWindow(document);
+                resultWindow.Show();
+            }
+
+        }
+
+        private void obfuscateBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            btnOpenFile2.IsEnabled = false;
+        }
+
+        private void analyseBtn_Checked(object sender, RoutedEventArgs e)
+        {
+            btnOpenFile2.IsEnabled = true;
         }
     }
 }
