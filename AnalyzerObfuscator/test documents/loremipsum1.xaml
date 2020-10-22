@@ -1,0 +1,43 @@
+﻿<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:local="clr-namespace:AnalyzerObfuscator.test_documents"
+              ColumnWidth="400" FontSize="14" FontFamily="Georgia" ColumnGap="20" PagePadding="20">
+
+    <Paragraph>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+		Donec iaculis ornare enim eget condimentum.
+		Vestibulum tempor massa in volutpat tempor.
+		Etiam mi odio, tempor quis varius in, hendrerit non justo.
+		Mauris imperdiet mi non efficitur scelerisque.
+		Pellentesque nec tincidunt libero. Vivamus quam metus, interdum id felis sit amet, consequat fringilla nisl.
+		Ut consequat dolor in augue cursus, a porttitor sem accumsan. Praesent rhoncus risus et ante sollicitudin lacinia id sed augue.
+		Etiam posuere rhoncus pulvinar. Nunc porta et lectus et fermentum. Ut nec odio malesuada, luctus ante sit amet, venenatis diam.
+		Pellentesque commodo libero fringilla, iaculis leo non, ornare mi. Quisque vitae ex est.
+	</Paragraph>
+	<Paragraph>
+		Integer porta odio risus, sed scelerisque quam malesuada non.
+		Quisque ornare efficitur tortor, in scelerisque lacus ultricies eget.
+		Duis vel euismod dui. In nisl sapien, pulvinar a sem vel, rutrum lacinia nisi.
+		Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+		Integer euismod eros mauris, nec eleifend nisl fringilla placerat. Aliquam erat volutpat.
+		Fusce mauris lectus, sodales ac arcu vel, iaculis placerat tortor. Quisque vulputate dignissim eleifend.
+		Vivamus iaculis iaculis dapibus. Etiam non facilisis ipsum, id accumsan nisi. Curabitur consequat diam quis nunc sodales interdum.
+	</Paragraph>
+	<Paragraph>
+		Ut vulputate sit amet quam auctor molestie. Curabitur eget consequat metus.
+		Proin efficitur rutrum urna, sit amet ultrices magna luctus et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+		Phasellus lacinia nibh nulla, nec pretium dolor auctor eget. Mauris quis enim faucibus, sollicitudin nisl non, efficitur mauris.
+		Phasellus vulputate dolor neque, sed vestibulum ligula suscipit eget. Fusce feugiat odio leo, ut vulputate arcu rutrum et.
+		In vulputate non orci in condimentum. Sed eget fermentum sapien, sit amet molestie arcu. Nam vel enim vel purus laoreet pulvinar.
+		Mauris dapibus felis vitae mi faucibus consectetur.
+	</Paragraph>
+	<Paragraph>
+		Sed finibus felis id elit luctus, at scelerisque dui pharetra. Fusce eu elit bibendum, maximus ex a, consectetur diam.
+		Quisque non tincidunt neque, nec mollis dolor.
+		Vestibulum tempus, ligula vitae auctor tempus, ante tortor euismod augue, et dapibus dolor leo sit amet eros.
+		Ut scelerisque, ligula ac posuere convallis, quam dui aliquet purus, in fermentum sem libero malesuada tortor.
+		Etiam finibus massa in eros feugiat dignissim. Phasellus a bibendum massa, vel maximus turpis.
+	</Paragraph>
+	<Paragraph>
+		Suspendisse semper, nibh at sagittis tincidunt, arcu tellus tincidunt lectus, a pharetra massa enim quis orci. Aliquam ante purus, fermentum sed metus ac, viverra venenatis leo. Aliquam tincidunt condimentum libero, ut scelerisque lacus ultrices quis. Nunc viverra felis eget nulla mattis, eget convallis lorem feugiat. Etiam eget blandit sapien. Cras sodales convallis imperdiet. Cras euismod pulvinar mattis. Praesent luctus pretium dui non pellentesque. Sed ullamcorper massa sit amet neque dignissim, tincidunt venenatis diam pharetra. Praesent aliquam ornare lorem, sit amet tincidunt odio mollis non. Fusce sit amet est a quam ultricies accumsan eget ac sem. Donec malesuada quam interdum sapien elementum, nec semper risus ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus quis eros sodales metus volutpat vestibulum. Aliquam et lorem sit amet erat commodo gravida.
+	</Paragraph>
+</FlowDocument>

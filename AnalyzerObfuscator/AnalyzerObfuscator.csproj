@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Page Update="test documents\test1a.xaml">
-      <CopyToOutputDirectory></CopyToOutputDirectory>
-    </Page>
+    <Compile Remove="test documents\**" />
+    <EmbeddedResource Remove="test documents\**" />
+    <None Remove="test documents\**" />
+    <Page Remove="test documents\**" />
   </ItemGroup>
 
 </Project>
