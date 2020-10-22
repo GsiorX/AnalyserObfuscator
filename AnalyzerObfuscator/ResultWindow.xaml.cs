@@ -33,9 +33,23 @@ namespace AnalyzerObfuscator
         {
             Analyzer analyzer = new Analyzer();
             // Analyse documents
-            (double, double, double) res = analyzer.AnalyzeDocuments(_document, _obfDocument);
+            List<(string, double)> res = analyzer.AnalyzeDocuments(_document, _obfDocument);
+            int i = 1;
+            foreach ((string, double) row in res)
+            {
+                System.Windows.Controls.TextBox txt = new System.Windows.Controls.TextBox();
+                txt.Text = row.Item1;
+                Grid.SetColumn(txt, 1);
+                Grid.SetRow(txt, i);
+                resultsGrid.Children.Add(txt);
 
-            jaccart.Text = res.Item1.ToString();
+                System.Windows.Controls.TextBox txt2 = new System.Windows.Controls.TextBox();
+                txt2.Text = row.Item2.ToString();
+                Grid.SetColumn(txt2, 2);
+                Grid.SetRow(txt2, i);
+                resultsGrid.Children.Add(txt2);
+                i++;
+            }
         }
     }
 }

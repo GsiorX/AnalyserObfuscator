@@ -69,7 +69,6 @@ namespace AnalyzerObfuscator
         private static FlowDocument SetRTF(string filePath)
         {
             FileStream xamlFile = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            // StringReader stringReader = new StringReader(xamlString);
             System.Xml.XmlReader xmlReader = System.Xml.XmlReader.Create(xamlFile);
             return XamlReader.Load(xmlReader) as FlowDocument;
         }
@@ -80,8 +79,8 @@ namespace AnalyzerObfuscator
             FlowDocument obfDocument = SetRTF(obfDocumentName);
 
             ResultWindow resultWindow = new ResultWindow(document, obfDocument);
-
             resultWindow.Show();
+
             this.Close();
         }
     }

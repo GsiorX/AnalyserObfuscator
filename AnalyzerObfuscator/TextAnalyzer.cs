@@ -6,6 +6,6 @@ namespace AnalyzerObfuscator
 {
     interface TextAnalyzer
     {
-        double AnalyzeText(string text, string obfuscated);
+        List<(string, double)> AnalyzeText(string text, string obfuscated);
     }
 }

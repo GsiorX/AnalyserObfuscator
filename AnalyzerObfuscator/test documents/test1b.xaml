@@ -2,6 +2,6 @@
               xmlns:local="clr-namespace:AnalyzerObfuscator.test_documents"
               ColumnWidth="400" FontSize="14" FontFamily="Georgia">
     <Paragraph>
-        <Bold>AI and humans have always been friendly.</Bold>
+        <Bold>AI and humans have always been friendly. Yes it is.</Bold>
     </Paragraph>
 </FlowDocument>
