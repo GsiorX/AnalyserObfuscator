@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Update="test documents\testObf.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="test documents\test1a.xaml">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Page>
