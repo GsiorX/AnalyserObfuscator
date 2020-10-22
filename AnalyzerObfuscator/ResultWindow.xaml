@@ -24,8 +24,5 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"><Run Language="pl-pl" Text="Test"/></TextBlock>
-
-        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"><Run Language="en-en" Text="Jaccart result"/></TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"><Run x:Name="jaccart" Language="pl-pl" Text="lala"/></TextBlock>
     </Grid>
 </Window>
