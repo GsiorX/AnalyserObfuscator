@@ -75,7 +75,7 @@ namespace AnalyzerObfuscator
             FlowDocument document = SetRTF(documentName);
             FlowDocument obfDocument = SetRTF(obfDocumentName);
 
-            (double, double, double) res = analyzer.AnalyzeDocuments(document, obfDocument);
+            (double[]) res = analyzer.AnalyzeDocuments(document, obfDocument);
             result.Text = res.Item1.ToString();
         }
     }
