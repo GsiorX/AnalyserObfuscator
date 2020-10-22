@@ -29,6 +29,11 @@ namespace AnalyzerObfuscator
         public MainWindow()
         {
             InitializeComponent();
+
+            documentName = System.IO.Path.Combine(Environment.CurrentDirectory, @"..\\..\\..\\test documents\test1a.xaml");
+            file1.Text = "test1a.xaml";
+            obfDocumentName = System.IO.Path.Combine(Environment.CurrentDirectory, @"..\\..\\..\\test documents\test1b.xaml");
+            file2.Text = "test1b.xaml";
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
@@ -71,12 +76,13 @@ namespace AnalyzerObfuscator
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
-            Analyzer analyzer = new Analyzer();
             FlowDocument document = SetRTF(documentName);
             FlowDocument obfDocument = SetRTF(obfDocumentName);
 
-            (double, double, double) res = analyzer.AnalyzeDocuments(document, obfDocument);
-            result.Text = res.Item1.ToString();
+            ResultWindow resultWindow = new ResultWindow(document, obfDocument);
+
+            resultWindow.Show();
+            this.Close();
         }
     }
 }
