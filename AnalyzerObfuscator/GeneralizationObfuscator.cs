@@ -8,8 +8,8 @@ namespace AnalyzerObfuscator
 {
     class GeneralizationObfuscator
     {
-        (string, string)[] subjects = { ("pies", "zwierz") };
-        string[] adjectives = { "różowy" };
+        (string, string, string, string)[] subjects = { ("dog", "animal", "a", "an") };
+        string[] adjectives = { "pink" };
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
@@ -19,13 +19,13 @@ namespace AnalyzerObfuscator
             {
                 string sentence = sentences[i];
                 List<string> tmpSentences = new List<string>();
-                foreach ((string, string)subject in subjects)
+                foreach ((string, string, string, string) subject in subjects)
                 {
                     if (sentence.Contains(subject.Item1))
                     {
                         givenSubject = subject.Item1;
                         sentence = sentence.Replace(subject.Item1, subject.Item2);
-                        tmpSentences.Add(" " + char.ToUpper(subject.Item2[0]) + subject.Item2.Substring(1) + " to jest " + subject.Item1);
+                        tmpSentences.Add("The " + subject.Item2 + " is " + subject.Item4 + " " + subject.Item1);
                     }
                 }
                 if (givenSubject != null)
@@ -35,7 +35,7 @@ namespace AnalyzerObfuscator
                         if (sentence.Contains(adjective))
                         {
                             sentence = sentence.Replace(adjective, "");
-                            tmpSentences.Add(" " + char.ToUpper(givenSubject[0]) + givenSubject.Substring(1) + " jest " + adjective);
+                            tmpSentences.Add("The " + givenSubject + " is " + adjective);
                         }
                     }
                 }

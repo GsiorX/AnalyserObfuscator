@@ -36,7 +36,7 @@ namespace AnalyzerObfuscator
                     index++;
             }
 
-            return new List<(string, double)>() { ("Liczba liter w tekście " + name, lettersCount), ("Liczba słów w tekście " + name, wordCount), ("Liczba zdań w tekście " + name, sentenceCount) };
+            return new List<(string, double)>() { ("Number of letters in " + name, lettersCount), ("Number of words in " + name, wordCount), ("Number of sentences in " + name, sentenceCount) };
         }
         public List<(string, double)> AnalyzeText(string text, string obfuscated)
         {

@@ -10,6 +10,8 @@ namespace AnalyzerObfuscator
         TextAnalyzer textAnalyzer = new JaccardAnalyzer();
 
         TextAnalyzer basicAnalyzer = new BasicAnalizer();
+
+        LCSAnalyzer lcsAnalyzer = new LCSAnalyzer();
         public List<(string, double)>  AnalyzeDocuments(FlowDocument document, FlowDocument obfDocument)
         {
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
@@ -18,6 +20,7 @@ namespace AnalyzerObfuscator
             List<(string, double)> results = new List<(string, double)>();
             results.AddRange(textAnalyzer.AnalyzeText(text, obfText));
             results.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
+            results.AddRange(lcsAnalyzer.AnalyzeText(text, obfText));
 
             return results;
         }
