@@ -5,6 +5,13 @@ namespace AnalyzerObfuscator
 {
     class TextGenerator
     {
+
+        private static string capitalize(string word)
+        {
+            if (word.Length < 1) return word;
+
+            return char.ToUpper(word[0]) + word.Substring(1);
+        }
         static string generateSentence(Random rand)
         {
             int nounId = rand.Next(0, Vocabulary.nouns.Count);
@@ -19,7 +26,7 @@ namespace AnalyzerObfuscator
             var advParticle = advParticlePair.Value;
             var verb = Vocabulary.verbs[verbId];
 
-            return String.Format("{0} {1} {2} is {3}ing.", advParticle, adv, noun, verb);
+            return String.Format("{0} {1} {2} is {3}ing.", capitalize(advParticle), adv, noun, verb);
         }
 
         public static string generateText(int length)
