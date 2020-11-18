@@ -30,7 +30,7 @@ namespace AnalyzerObfuscator
         public static readonly string[] verbs = {
             "eat",
             "walk",
-            "run",
+            "runn",
             "talk",
         };
 

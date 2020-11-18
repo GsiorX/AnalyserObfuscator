@@ -44,5 +44,28 @@ namespace AnalyzerObfuscator
             }
             return res;
         }
+
+        public static string generateFlowText(int length)
+        {
+            return @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+xmlns: local =""clr-namespace:AnalyzerObfuscator.test_documents""
+ColumnWidth =""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">
+
+<Paragraph>
+" + generateText(length) +
+@"
+</Paragraph>
+</FlowDocument>";
+
+        }
+
+        public static void Main(string[] args)
+        {
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"./output.xaml", false))
+            {
+                file.WriteLine(generateFlowText(100));
+            }
+        }
     }
 }
