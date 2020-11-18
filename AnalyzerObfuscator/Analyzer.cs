@@ -14,9 +14,9 @@ namespace AnalyzerObfuscator
 
         ITagAnalyzer tagAnalyzer = new TagAnalyzer();
 
-        public List<(string, double)> AnalyzeDocuments(string documentName, string obfDocumentName)
+        public List<(string, string)> AnalyzeDocuments(string documentName, string obfDocumentName)
         {
-            List<(string, double)> results = new List<(string, double)>();
+            List<(string, string)> results = new List<(string, string)>();
 
             FlowDocument document = Helpers.SetRTF(documentName);
             FlowDocument obfDocument = Helpers.SetRTF(obfDocumentName);

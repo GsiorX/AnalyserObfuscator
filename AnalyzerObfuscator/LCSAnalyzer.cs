@@ -40,9 +40,9 @@ namespace AnalyzerObfuscator
 
             return lcs;
         }
-        public List<(string, double)> AnalyzeText(string text, string obfuscated)
+        public List<(string, string)> AnalyzeText(string text, string obfuscated)
         {
-            return new List<(string, double)>() { ("LCS length", (double)LCS(text, obfuscated)) };
+            return new List<(string, string)>() { ("LCS length", LCS(text, obfuscated).ToString()) };
         }
     }
 }

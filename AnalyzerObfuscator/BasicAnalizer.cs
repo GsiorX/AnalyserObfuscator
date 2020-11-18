@@ -7,7 +7,7 @@ namespace AnalyzerObfuscator
 {
     class BasicAnalizer : TextAnalyzer
     {
-        public List<(string, double)> AnalyzeSingleText(string text, string name)
+        public List<(string, string)> AnalyzeSingleText(string text, string name)
         {
             double wordCount = 0, sentenceCount = 0, lettersCount = 0, wordPerSentResult = 0, lettersPerWordResult = 0; ;
             const char dot = '.', exclamation = '!', question = '?';
@@ -59,17 +59,17 @@ namespace AnalyzerObfuscator
             wordPerSentResult /= sentenceCount;
             lettersPerWordResult /= wordCount;
 
-            return new List<(string, double)>() {
-                ("Number of letters in " + name, lettersCount),
-                ("Number of words in " + name, wordCount),
-                ("Number of sentences in " + name, sentenceCount),
-                ("Average number of words in a sentence in " + name, Math.Round(wordPerSentResult, 2)),
-                ("Average number of letters in a word in " + name, Math.Round(lettersPerWordResult, 2))};
+            return new List<(string, string)>() {
+                ("Number of letters in " + name, lettersCount.ToString()),
+                ("Number of words in " + name, wordCount.ToString()),
+                ("Number of sentences in " + name, sentenceCount.ToString()),
+                ("Average number of words in a sentence in " + name, Math.Round(wordPerSentResult, 2).ToString()),
+                ("Average number of letters in a word in " + name, Math.Round(lettersPerWordResult, 2).ToString())};
         }
-        public List<(string, double)> AnalyzeText(string text, string obfuscated)
+        public List<(string, string)> AnalyzeText(string text, string obfuscated)
         {
-            List<(string, double)> ares = AnalyzeSingleText(text, "a");
-            List<(string, double)> bres = AnalyzeSingleText(obfuscated, "b");
+            List<(string, string)> ares = AnalyzeSingleText(text, "a");
+            List<(string, string)> bres = AnalyzeSingleText(obfuscated, "b");
 
             ares.AddRange(bres);
 

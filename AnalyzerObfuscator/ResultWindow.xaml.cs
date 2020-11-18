@@ -33,9 +33,9 @@ namespace AnalyzerObfuscator
         {
             Analyzer analyzer = new Analyzer();
             // Analyse documents
-            List<(string, double)> res = analyzer.AnalyzeDocuments(_documentName, _obfDocumentName);
+            List<(string, string)> res = analyzer.AnalyzeDocuments(_documentName, _obfDocumentName);
             int i = 1;
-            foreach ((string, double) row in res)
+            foreach ((string, string) row in res)
             {
                 System.Windows.Controls.TextBox txt = new System.Windows.Controls.TextBox();
                 txt.Text = row.Item1;
