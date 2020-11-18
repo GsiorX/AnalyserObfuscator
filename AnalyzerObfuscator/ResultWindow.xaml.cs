@@ -17,14 +17,14 @@ namespace AnalyzerObfuscator
     /// </summary>
     public partial class ResultWindow : Window
     {
-        FlowDocument _document;
-        FlowDocument _obfDocument;
-        public ResultWindow(FlowDocument document, FlowDocument obfDocument)
+        string _documentName;
+        string _obfDocumentName;
+        public ResultWindow(string documentName, string obfDocumentName)
         {
             InitializeComponent();
 
-            _document = document;
-            _obfDocument = obfDocument;
+            _documentName = documentName;
+            _obfDocumentName = obfDocumentName;
 
             Analyse();
         }
@@ -33,7 +33,7 @@ namespace AnalyzerObfuscator
         {
             Analyzer analyzer = new Analyzer();
             // Analyse documents
-            List<(string, double)> res = analyzer.AnalyzeDocuments(_document, _obfDocument);
+            List<(string, double)> res = analyzer.AnalyzeDocuments(_documentName, _obfDocumentName);
             int i = 1;
             foreach ((string, double) row in res)
             {

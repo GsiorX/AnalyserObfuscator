@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace AnalyzerObfuscator
 {
@@ -66,27 +68,17 @@ namespace AnalyzerObfuscator
             }
         }
 
-        private static FlowDocument SetRTF(string filePath)
-        {
-            FileStream xamlFile = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            System.Xml.XmlReader xmlReader = System.Xml.XmlReader.Create(xamlFile);
-            return XamlReader.Load(xmlReader) as FlowDocument;
-        }
-
         private void next_Click(object sender, RoutedEventArgs e)
         {
             if (analyseBtn.IsChecked == true)
-            {
-                FlowDocument document = SetRTF(documentName);
-                FlowDocument obfDocument = SetRTF(obfDocumentName);
-
-                ResultWindow resultWindow = new ResultWindow(document, obfDocument);
+            { 
+                ResultWindow resultWindow = new ResultWindow(documentName, obfDocumentName);
                 resultWindow.Show();
             }
 
             if (obfuscateBtn.IsChecked == true)
             {
-                FlowDocument document = SetRTF(documentName);
+                FlowDocument document = Helpers.SetRTF(documentName);
 
                 ObfuscationResultWindow resultWindow = new ObfuscationResultWindow(document);
                 resultWindow.Show();

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Documents;
+using System.Windows.Markup;
 
 namespace AnalyzerObfuscator
 {
@@ -12,15 +11,23 @@ namespace AnalyzerObfuscator
         TextAnalyzer basicAnalyzer = new BasicAnalizer();
 
         LCSAnalyzer lcsAnalyzer = new LCSAnalyzer();
-        public List<(string, double)>  AnalyzeDocuments(FlowDocument document, FlowDocument obfDocument)
-        {
-            string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
-            string obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text; ;
 
+        ITagAnalyzer tagAnalyzer = new TagAnalyzer();
+
+        public List<(string, double)> AnalyzeDocuments(string documentName, string obfDocumentName)
+        {
             List<(string, double)> results = new List<(string, double)>();
+
+            FlowDocument document = Helpers.SetRTF(documentName);
+            FlowDocument obfDocument = Helpers.SetRTF(obfDocumentName);
+
+            string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
+            string obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text;
+
             results.AddRange(textAnalyzer.AnalyzeText(text, obfText));
             results.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
             results.AddRange(lcsAnalyzer.AnalyzeText(text, obfText));
+            results.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
 
             return results;
         }
