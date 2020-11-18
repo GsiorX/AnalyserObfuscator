@@ -5,9 +5,11 @@ namespace AnalyzerObfuscator
     class Vocabulary
     {
         public static readonly Dictionary<string, string> nouns = new Dictionary<string, string>() {
+            { "animal", "an" },
             { "dog", "a" },
             { "cat", "a" },
             { "fish", "a" },
+            { "person", "a" },
             { "man", "a" },
             { "woman", "a" },
             { "boy", "a" },

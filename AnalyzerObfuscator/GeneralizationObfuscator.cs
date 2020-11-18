@@ -8,7 +8,6 @@ namespace AnalyzerObfuscator
 {
     class GeneralizationObfuscator
     {
-        (string, string, string, string)[] subjects = { ("dog", "animal", "a", "an") };
         string[] adjectives = { "pink" };
         public string ObfuscateText(string text)
         {
@@ -19,25 +18,45 @@ namespace AnalyzerObfuscator
             {
                 string sentence = sentences[i];
                 List<string> tmpSentences = new List<string>();
-                foreach ((string, string, string, string) subject in subjects)
+                foreach (KeyValuePair<string, (string, string)> subject in Vocabulary.generalizations)
                 {
-                    if (sentence.Contains(subject.Item1))
+                    if (sentence.Contains(subject.Key))
                     {
-                        givenSubject = subject.Item1;
-                        sentence = sentence.Replace(subject.Item1, subject.Item2);
-                        tmpSentences.Add("The " + subject.Item2 + " is " + subject.Item4 + " " + subject.Item1);
+                        if (sentence.Contains("a " + subject.Key))
+                        {
+                            sentence = sentence.Replace("a " + subject.Key, subject.Value.Item1 + " " + subject.Value.Item2);
+                        }
+                        else if (sentence.Contains("an " + subject.Key))
+                        {
+                            sentence = sentence.Replace("an " + subject.Key, subject.Value.Item1 + " " + subject.Value.Item2);
+                        }
+                        else
+                        {
+                            sentence = sentence.Replace(subject.Key, subject.Value.Item2);
+                        }
+                        givenSubject = subject.Key;
+
+                        Vocabulary.nouns.TryGetValue(subject.Key, out string particle);
+                        tmpSentences.Add("The " + subject.Value.Item2 + " is " + particle + " " + subject.Key);
                     }
                 }
                 if (givenSubject != null)
                 {
+                    List<string> splitSentence = new List<string>(sentence.Split(" "));
                     foreach (string adjective in adjectives)
                     {
-                        if (sentence.Contains(adjective))
+                        if (splitSentence.Contains(adjective))
                         {
-                            sentence = sentence.Replace(adjective, "");
+                            int index = splitSentence.IndexOf(adjective);
+                            if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1] == "a" || splitSentence[index - 1] == "an") && Vocabulary.nouns.TryGetValue(splitSentence[index + 1], out string particle))
+                            {
+                                splitSentence[index - 1] = particle;
+                            }
+                            splitSentence.Remove(adjective);
                             tmpSentences.Add("The " + givenSubject + " is " + adjective);
                         }
                     }
+                    sentence = String.Join(" ", splitSentence);
                 }
 
                 outputSentences.Add(sentence);
