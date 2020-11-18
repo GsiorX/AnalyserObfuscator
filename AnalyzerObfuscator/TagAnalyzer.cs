@@ -6,17 +6,17 @@ namespace AnalyzerObfuscator
 {
     class TagAnalyzer : ITagAnalyzer
     {
-        public List<(string, double)> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader)
+        public List<(string, string)> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader)
         {
-            List<(string, double)> documentNodeCount = AnalyzeXml(docReader, "document");
-            List<(string, double)> obfNodeCount = AnalyzeXml(obfReader, "obfuscated document");
+            List<(string, string)> documentNodeCount = AnalyzeXml(docReader, "document");
+            List<(string, string)> obfNodeCount = AnalyzeXml(obfReader, "obfuscated document");
 
             documentNodeCount.AddRange(obfNodeCount);
 
             return documentNodeCount;
         }
 
-        public List<(string, double)> AnalyzeXml(System.Xml.XmlReader reader, string docName)
+        public List<(string, string)> AnalyzeXml(System.Xml.XmlReader reader, string docName)
         {
             Dictionary<string, int> nodeCount = new Dictionary<string, int>();
 
@@ -34,11 +34,11 @@ namespace AnalyzerObfuscator
                 }
             }
 
-            List<(string, double)> listNodeCount = new List<(string, double)>();
+            List<(string, string)> listNodeCount = new List<(string, string)>();
 
             foreach (KeyValuePair<string, int> entry in nodeCount)
             {
-                listNodeCount.Add(("Number of " + entry.Key + "s in " + docName, (double)entry.Value));
+                listNodeCount.Add(("Number of " + entry.Key + "s in " + docName, entry.Value.ToString()));
             }
 
             return listNodeCount;

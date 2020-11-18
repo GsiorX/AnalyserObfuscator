@@ -6,7 +6,7 @@ namespace AnalyzerObfuscator
 {
     interface ITagAnalyzer
     {
-        public List<(string, double)> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader);
-        public List<(string, double)> AnalyzeXml(System.Xml.XmlReader reader, string docName);
+        public List<(string, string)> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader);
+        public List<(string, string)> AnalyzeXml(System.Xml.XmlReader reader, string docName);
     }
 }
