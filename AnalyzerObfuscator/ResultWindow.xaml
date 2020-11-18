@@ -38,6 +38,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">Wyniki analizy</TextBlock>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">Analyzis results</TextBlock>
     </Grid>
 </Window>

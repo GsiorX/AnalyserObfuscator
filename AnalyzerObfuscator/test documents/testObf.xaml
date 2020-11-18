@@ -2,6 +2,6 @@
               xmlns:local="clr-namespace:AnalyzerObfuscator"
               ColumnWidth="400" FontSize="14" FontFamily="Georgia">
     <Paragraph>
-        <Bold>Po drodze idzie różowy pies.</Bold>
+        <Bold>There is a pink dog on the road.</Bold>
     </Paragraph>
 </FlowDocument>
