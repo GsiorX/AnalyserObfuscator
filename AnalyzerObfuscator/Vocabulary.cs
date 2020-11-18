@@ -27,6 +27,7 @@ namespace AnalyzerObfuscator
             { "european", "a" },
             { "asian", "an" },
             { "british", "a" },
+            { "pink", "a" },
         };
 
         public static readonly string[] verbs = {

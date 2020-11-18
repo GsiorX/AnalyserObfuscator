@@ -8,7 +8,6 @@ namespace AnalyzerObfuscator
 {
     class GeneralizationObfuscator
     {
-        string[] adjectives = { "pink" };
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
@@ -43,17 +42,17 @@ namespace AnalyzerObfuscator
                 if (givenSubject != null)
                 {
                     List<string> splitSentence = new List<string>(sentence.Split(" "));
-                    foreach (string adjective in adjectives)
+                    foreach (KeyValuePair<string, string> adjective in Vocabulary.adjectives)
                     {
-                        if (splitSentence.Contains(adjective))
+                        if (splitSentence.Contains(adjective.Key))
                         {
-                            int index = splitSentence.IndexOf(adjective);
+                            int index = splitSentence.IndexOf(adjective.Key);
                             if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1] == "a" || splitSentence[index - 1] == "an") && Vocabulary.nouns.TryGetValue(splitSentence[index + 1], out string particle))
                             {
                                 splitSentence[index - 1] = particle;
                             }
-                            splitSentence.Remove(adjective);
-                            tmpSentences.Add("The " + givenSubject + " is " + adjective);
+                            splitSentence.Remove(adjective.Key);
+                            tmpSentences.Add("The " + givenSubject + " is " + adjective.Key);
                         }
                     }
                     sentence = String.Join(" ", splitSentence);

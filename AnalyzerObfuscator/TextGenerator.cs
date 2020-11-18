@@ -48,8 +48,8 @@ namespace AnalyzerObfuscator
         public static string generateFlowText(int length)
         {
             return @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
-xmlns: local =""clr-namespace:AnalyzerObfuscator.test_documents""
-ColumnWidth =""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">
+xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""
+ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">
 
 <Paragraph>
 " + generateText(length) +
