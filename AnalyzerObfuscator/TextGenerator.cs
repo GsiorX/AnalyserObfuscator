@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace AnalyzerObfuscator
 {
-    class TextGenerator
+    public class TextGenerator
     {
 
         private static string capitalize(string word)
@@ -57,15 +57,6 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
 </Paragraph>
 </FlowDocument>";
 
-        }
-
-        public static void Main(string[] args)
-        {
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"./output.xaml", false))
-            {
-                file.WriteLine(generateFlowText(100));
-            }
         }
     }
 }
