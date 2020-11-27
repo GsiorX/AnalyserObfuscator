@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalyzerObfuscator", "AnalyzerObfuscator\AnalyzerObfuscator.csproj", "{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{785E5016-9360-4A30-9861-1DA3545B9F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{785E5016-9360-4A30-9861-1DA3545B9F88}"
 	ProjectSection(ProjectDependencies) = postProject
 		{598DE7C9-05FB-4374-9B49-C8CC13CFCEBA} = {598DE7C9-05FB-4374-9B49-C8CC13CFCEBA}
 	EndProjectSection
