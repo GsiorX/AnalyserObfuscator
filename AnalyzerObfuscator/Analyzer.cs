@@ -14,6 +14,8 @@ namespace AnalyzerObfuscator
 
         ITagAnalyzer tagAnalyzer = new TagAnalyzer();
 
+        CosineAnalyser cosineAnalyser = new CosineAnalyser();
+
         public List<(string, string)> AnalyzeDocuments(string documentName, string obfDocumentName)
         {
             List<(string, string)> results = new List<(string, string)>();
@@ -28,6 +30,7 @@ namespace AnalyzerObfuscator
             results.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
             results.AddRange(lcsAnalyzer.AnalyzeText(text, obfText));
             results.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
+            results.AddRange(cosineAnalyser.CalculateCosineSimilarity(text, obfText));
 
             return results;
         }
