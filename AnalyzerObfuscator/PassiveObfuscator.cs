@@ -12,9 +12,17 @@ namespace AnalyzerObfuscator
             int verbIdx = -1;
             Verb verb = null;
             List<string> splitSentence = new List<string>(sentence.Split(" "));
+            for (int i = splitSentence.Count - 1; i >= 0; i--)
+            {
+                if (splitSentence[i].Length == 0 || splitSentence[i].Equals(" "))
+                {
+                    splitSentence.RemoveAt(i);
+                }
+            }
+
             for (int i = 0; i < splitSentence.Count; i++)
             {
-                var verbOpt = Verb.ToVerb(splitSentence[i]);
+                var verbOpt = Verb.ParseVerb(splitSentence[i]);
                 if (verbOpt != null)
                 {
                     verbIdx = i;
@@ -24,18 +32,51 @@ namespace AnalyzerObfuscator
 
             if (verb == null || !verb.IsPassive) return sentence;
 
-            // simple version
-            string t = splitSentence[verbIdx - 3];
-            splitSentence[verbIdx - 3] = splitSentence[verbIdx + 1];
-            splitSentence[verbIdx + 1] = t;
+            int n1Idx = -1;
+            Noun n1 = null;
+            for (int i = verbIdx - 1; i >= 0; i--)
+            {
+                var nounOpt = Noun.ParseNoun(splitSentence[i]);
+                if (nounOpt != null)
+                {
+                    n1 = nounOpt;
+                    n1Idx = i;
+                    break;
+                }
+            }
 
-            t = splitSentence[verbIdx - 2];
-            splitSentence[verbIdx - 2] = splitSentence[verbIdx + 2];
-            splitSentence[verbIdx + 2] = t;
+            int n2Idx = -1;
+            Noun n2 = null;
+            for (int i = verbIdx + 1; i < splitSentence.Count; i++)
+            {
+                var nounOpt = Noun.ParseNoun(splitSentence[i]);
+                if (nounOpt != null)
+                {
+                    n2 = nounOpt;
+                    n2Idx = i;
+                    break;
+                }
+            }
 
-            splitSentence[verbIdx] = "being " + verb.Text + "en by";
+            if (n1 == null || n2 == null) return sentence;
 
-            return String.Join(" ", splitSentence);
+            try
+            {
+                splitSentence[n1Idx - 1] = n2.Particle;
+                splitSentence[n1Idx] = n2.Text;
+
+                splitSentence[n2Idx - 1] = n1.Particle;
+                splitSentence[n2Idx] = n1.Text;
+                splitSentence[verbIdx] = "being " + verb.Text + "en by";
+
+                splitSentence[0] = Vocabulary.capitalize(splitSentence[0]);
+
+                return string.Join(" ", splitSentence);
+            }
+            catch (Exception)
+            {
+                return sentence;
+            }
         }
         public string ObfuscateText(string text)
         {

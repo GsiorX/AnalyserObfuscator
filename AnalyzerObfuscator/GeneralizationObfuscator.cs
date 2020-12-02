@@ -36,8 +36,8 @@ namespace AnalyzerObfuscator
                         }
                         givenSubject = subject.Key;
 
-                        Vocabulary.subjects.TryGetValue(subject.Key, out string particle);
-                        tmpSentences.Add("The " + subject.Value.Item2 + " is " + particle + " " + subject.Key);
+                        Vocabulary.subjects.TryGetValue(subject.Key, out Noun noun);
+                        tmpSentences.Add("The " + subject.Value.Item2 + " is " + noun.Particle + " " + subject.Key);
                     }
                 }
                 if (givenSubject != null)
@@ -47,9 +47,9 @@ namespace AnalyzerObfuscator
                         if (splitSentence.Contains(adjective.Key))
                         {
                             int index = splitSentence.IndexOf(adjective.Key);
-                            if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1].ToLower() == "a" || splitSentence[index - 1].ToLower() == "an") && Vocabulary.subjects.TryGetValue(splitSentence[index + 1], out string particle))
+                            if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1].ToLower() == "a" || splitSentence[index - 1].ToLower() == "an") && Vocabulary.subjects.TryGetValue(splitSentence[index + 1], out Noun noun))
                             {
-                                splitSentence[index - 1] = particle;
+                                splitSentence[index - 1] = noun.Particle;
                             }
                             splitSentence.Remove(adjective.Key);
                             tmpSentences.Add("The " + givenSubject + " is " + adjective.Key);

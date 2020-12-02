@@ -19,16 +19,16 @@ namespace AnalyzerObfuscator
             return char.ToLower(word[0]) + word.Substring(1);
         }
 
-        public static readonly Dictionary<string, string> subjects = new Dictionary<string, string>() {
-            { "animal", "an" },
-            { "dog", "a" },
-            { "cat", "a" },
-            { "fish", "a" },
-            { "person", "a" },
-            { "man", "a" },
-            { "woman", "a" },
-            { "boy", "a" },
-            { "girl", "a" },
+        public static readonly Dictionary<string, Noun> subjects = new Dictionary<string, Noun>() {
+            { "animal", new Noun("an", "animal", new List<string>(){ "animal" }) },
+            { "dog", new Noun("a", "dog", new List<string>(){ "animal" }) },
+            { "cat", new Noun("a", "cat", new List<string>(){ "animal" }) },
+            { "fish", new Noun("a", "fish", new List<string>(){ "animal" }) },
+            { "person", new Noun("a", "person", new List<string>(){ "person" }) },
+            { "man", new Noun("a", "man", new List<string>(){ "person" }) },
+            { "woman", new Noun("a", "woman", new List<string>(){ "person" }) },
+            { "boy", new Noun("a", "boy", new List<string>(){ "person" }) },
+            { "girl", new Noun("a", "girl", new List<string>(){ "person" }) },
         };
 
         public static readonly Dictionary<string, Noun> nouns = new Dictionary<string, Noun>() {

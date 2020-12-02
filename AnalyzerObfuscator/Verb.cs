@@ -32,7 +32,7 @@ namespace AnalyzerObfuscator
             return this;
         }
 
-        public static Verb ToVerb(string word)
+        public static Verb ParseVerb(string word)
         {
             foreach (Verb verb in Vocabulary.verbs)
             {
