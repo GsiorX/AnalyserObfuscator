@@ -6,40 +6,59 @@ using System.Text;
 
 namespace AnalyzerObfuscator
 {
-    class GeneralizationObfuscator
+    class GeneralizationObfuscator : IObfuscator
     {
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
             List<string> outputSentences = new List<string>();
-            string givenSubject = null;
+            
             for (int i = 0; i < sentences.Length; i++)
             {
+                string givenSubject = null;
                 string sentence = Vocabulary.lower(sentences[i]);
                 List<string> splitSentence = new List<string>(sentence.Split(" "));
+                splitSentence[0] = Vocabulary.lower(splitSentence[0]);
+
                 List<string> tmpSentences = new List<string>();
                 foreach (KeyValuePair<string, (string, string)> subject in Vocabulary.generalizations)
                 {
-                    if (sentence.Contains(subject.Key))
+                    if (splitSentence.Contains(subject.Key))
                     {
-                        if (sentence.Contains("a " + subject.Key))
+                        if (splitSentence.Contains("a " + subject.Key))
                         {
-                            sentence = sentence.Replace("a " + subject.Key, subject.Value.Item1 + " " + subject.Value.Item2);
+                            int idx = splitSentence.IndexOf("a " + subject.Key);
+                            splitSentence[idx] = subject.Value.Item1 + " " + subject.Value.Item2;
                         }
-                        else if (sentence.Contains("an " + subject.Key))
+                        else if (splitSentence.Contains("an " + subject.Key))
                         {
-                            sentence = sentence.Replace("an " + subject.Key, subject.Value.Item1 + " " + subject.Value.Item2);
+                            int idx = splitSentence.IndexOf("an " + subject.Key);
+                            splitSentence[idx] = subject.Value.Item1 + " " + subject.Value.Item2;
                         }
                         else
                         {
-                            sentence = sentence.Replace(subject.Key, subject.Value.Item2);
+                            int idx = splitSentence.IndexOf(subject.Key);
+                            splitSentence[idx] = subject.Value.Item2;
                         }
                         givenSubject = subject.Key;
 
                         Vocabulary.subjects.TryGetValue(subject.Key, out Noun noun);
                         tmpSentences.Add("The " + subject.Value.Item2 + " is " + noun.Particle + " " + subject.Key);
+                        break;
                     }
                 }
+                if (givenSubject == null)
+                {
+                    foreach (KeyValuePair<string, Noun> subject in Vocabulary.subjects)
+                    {
+                        if (splitSentence.Contains(subject.Key))
+                        {
+                            givenSubject = subject.Key;
+                            break;
+                        }
+                    }
+                }
+
                 if (givenSubject != null)
                 {
                     foreach (KeyValuePair<string, string> adjective in Vocabulary.adjectives)
