@@ -26,13 +26,20 @@ namespace AnalyzerObfuscator
         void Analyze(FlowDocument document)
         {
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
-            GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
-            SynonymObfuscator synObfs = new SynonymObfuscator();
-            PassiveObfuscator pasObfs = new PassiveObfuscator();
-            string genObfsRes = genObfs.ObfuscateText(text);
-            string pasObfsRes = pasObfs.ObfuscateText(genObfsRes);
-            string synObfsRes = synObfs.ObfuscateText(pasObfsRes);
-            textBlock.Text = synObfsRes;
+            //GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
+            //SynonymObfuscator synObfs = new SynonymObfuscator();
+            //PassiveObfuscator pasObfs = new PassiveObfuscator();
+            //string genObfsRes = genObfs.ObfuscateText(text);
+            //string pasObfsRes = pasObfs.ObfuscateText(genObfsRes);
+            //string synObfsRes = synObfs.ObfuscateText(pasObfsRes);
+            List<IObfuscator> obfs = new List<IObfuscator>()
+            {
+                new GeneralizationObfuscator(),
+                new SynonymObfuscator(),
+                new PassiveObfuscator(),
+                new AddObfuscator(),
+            };
+            textBlock.Text = IObfuscator.JoinObf(obfs, text);
         }
     }
 }

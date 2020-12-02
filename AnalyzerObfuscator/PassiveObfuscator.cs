@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AnalyzerObfuscator
 {
-    class PassiveObfuscator
+    class PassiveObfuscator : IObfuscator
     {
 
         string MakePassive(string sentence)
@@ -19,6 +19,7 @@ namespace AnalyzerObfuscator
                     splitSentence.RemoveAt(i);
                 }
             }
+            sentence = string.Join(" ", splitSentence);
 
             for (int i = 0; i < splitSentence.Count; i++)
             {
