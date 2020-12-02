@@ -4,7 +4,22 @@ namespace AnalyzerObfuscator
 {
     class Vocabulary
     {
-        public static readonly Dictionary<string, string> nouns = new Dictionary<string, string>() {
+
+        public static string capitalize(string word)
+        {
+            if (word.Length < 1) return word;
+
+            return char.ToUpper(word[0]) + word.Substring(1);
+        }
+
+        public static string lower(string word)
+        {
+            if (word.Length < 1) return word;
+
+            return char.ToLower(word[0]) + word.Substring(1);
+        }
+
+        public static readonly Dictionary<string, string> subjects = new Dictionary<string, string>() {
             { "animal", "an" },
             { "dog", "a" },
             { "cat", "a" },
@@ -15,6 +30,12 @@ namespace AnalyzerObfuscator
             { "boy", "a" },
             { "girl", "a" },
         };
+
+        public static readonly Dictionary<string, Noun> nouns = new Dictionary<string, Noun>() {
+            { "apple", new Noun("an", "apple", new List<string>(){ "food" }) },
+            { "steak", new Noun("a", "steak", new List<string>(){ "food" }) },
+        };
+
 
         public static readonly Dictionary<string, string> adjectives = new Dictionary<string, string>() {
             { "tall", "a" },
@@ -30,12 +51,31 @@ namespace AnalyzerObfuscator
             { "pink", "a" },
         };
 
-        public static readonly string[] verbs = {
+        public static readonly string[] verbsOld = {
             "eat",
             "walk",
             "runn",
             "talk",
         };
+
+        public static readonly List<Verb> verbs = new List<Verb>() {
+            new Verb("eat", new List<string>() { "food" }).SetPassive(),
+            new Verb("walk", new List<string>() { "place" }),
+            new Verb("run", new List<string>() { "place" }),
+            new Verb("talk", new List<string>() { "person" }),
+        };
+
+        public static readonly Dictionary<string, string> verbTags = new Dictionary<string, string>() {
+            { "eat", "food" },
+            { "walk", "place" },
+            { "runn", "place" },
+        };
+
+        public static readonly string[] verbsPassive = {
+            "eat",
+        };
+
+
 
         public static readonly IDictionary<string, (string, string)> generalizations = new Dictionary<string, (string, string)>() {
             { "dog", ("an", "animal") },

@@ -17,7 +17,7 @@ namespace AnalyzerObfuscator
                     if (splitSentence.Contains(subject.Key))
                     {
                         int index = splitSentence.IndexOf(subject.Key);
-                        if (index > 1 && (splitSentence[index - 1].ToLower() == "a" || splitSentence[index - 1] == "an"))
+                        if (index > 1 && (splitSentence[index - 1].ToLower() == "a" || splitSentence[index - 1].ToLower() == "an"))
                         {
                             splitSentence[index - 1] = subject.Value.Item1;
                         }

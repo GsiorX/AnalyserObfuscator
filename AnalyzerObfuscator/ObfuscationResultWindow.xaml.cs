@@ -28,8 +28,10 @@ namespace AnalyzerObfuscator
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
             GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
             SynonymObfuscator synObfs = new SynonymObfuscator();
+            PassiveObfuscator pasObfs = new PassiveObfuscator();
             string genObfsRes = genObfs.ObfuscateText(text);
-            string synObfsRes = synObfs.ObfuscateText(genObfsRes);
+            string pasObfsRes = pasObfs.ObfuscateText(genObfsRes);
+            string synObfsRes = synObfs.ObfuscateText(pasObfsRes);
             textBlock.Text = synObfsRes;
         }
     }

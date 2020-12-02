@@ -15,7 +15,8 @@ namespace AnalyzerObfuscator
             string givenSubject = null;
             for (int i = 0; i < sentences.Length; i++)
             {
-                string sentence = sentences[i];
+                string sentence = Vocabulary.lower(sentences[i]);
+                List<string> splitSentence = new List<string>(sentence.Split(" "));
                 List<string> tmpSentences = new List<string>();
                 foreach (KeyValuePair<string, (string, string)> subject in Vocabulary.generalizations)
                 {
@@ -35,19 +36,18 @@ namespace AnalyzerObfuscator
                         }
                         givenSubject = subject.Key;
 
-                        Vocabulary.nouns.TryGetValue(subject.Key, out string particle);
+                        Vocabulary.subjects.TryGetValue(subject.Key, out string particle);
                         tmpSentences.Add("The " + subject.Value.Item2 + " is " + particle + " " + subject.Key);
                     }
                 }
                 if (givenSubject != null)
                 {
-                    List<string> splitSentence = new List<string>(sentence.Split(" "));
                     foreach (KeyValuePair<string, string> adjective in Vocabulary.adjectives)
                     {
                         if (splitSentence.Contains(adjective.Key))
                         {
                             int index = splitSentence.IndexOf(adjective.Key);
-                            if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1] == "a" || splitSentence[index - 1] == "an") && Vocabulary.nouns.TryGetValue(splitSentence[index + 1], out string particle))
+                            if (index > 1 && index < splitSentence.Count - 1 && (splitSentence[index - 1].ToLower() == "a" || splitSentence[index - 1].ToLower() == "an") && Vocabulary.subjects.TryGetValue(splitSentence[index + 1], out string particle))
                             {
                                 splitSentence[index - 1] = particle;
                             }
@@ -58,7 +58,7 @@ namespace AnalyzerObfuscator
                     sentence = String.Join(" ", splitSentence);
                 }
 
-                outputSentences.Add(sentence);
+                outputSentences.Add(Vocabulary.capitalize(sentence));
                 outputSentences.AddRange(tmpSentences);
             }
             return string.Join(".", outputSentences.ToArray());

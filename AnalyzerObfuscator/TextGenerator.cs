@@ -14,19 +14,30 @@ namespace AnalyzerObfuscator
         }
         static string generateSentence(Random rand)
         {
-            int nounId = rand.Next(0, Vocabulary.nouns.Count);
+            int nounId = rand.Next(0, Vocabulary.subjects.Count);
             int advId = rand.Next(0, Vocabulary.adjectives.Count);
-            int verbId = rand.Next(0, Vocabulary.verbs.Length);
+            int verbId = rand.Next(0, Vocabulary.verbs.Count);
 
-            var nounParticlePair = Enumerable.ToList(Vocabulary.nouns)[nounId];
+            var subParticlePair = Enumerable.ToList(Vocabulary.subjects)[nounId];
             var advParticlePair = Enumerable.ToList(Vocabulary.adjectives)[advId];
             // var nounParticle = nounParticlePair.Value;
-            var noun = nounParticlePair.Key;
+            var subject = subParticlePair.Key;
             var adv = advParticlePair.Key;
             var advParticle = advParticlePair.Value;
             var verb = Vocabulary.verbs[verbId];
 
-            return String.Format("{0} {1} {2} is {3}ing.", capitalize(advParticle), adv, noun, verb);
+            if (verb.Tags.Count > 0)
+            {
+                string tag = verb.Tags[rand.Next(0, verb.Tags.Count)];
+                var n = Noun.GetByTag(Vocabulary.nouns, tag);
+                if (n.Count > 0 )
+                {
+                    var cn = n[(rand.Next(0, n.Count))];
+                    return String.Format("{0} {1} {2} is {3}ing {4} {5}.", capitalize(advParticle), adv, subject, verb.Text, cn.particle, cn.text);
+                }
+            }
+
+            return String.Format("{0} {1} {2} is {3}ing.", capitalize(advParticle), adv, subject, verb.Text);
         }
 
         public static string generateText(int length)
