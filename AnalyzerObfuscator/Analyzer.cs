@@ -8,31 +8,52 @@ namespace AnalyzerObfuscator
     {
         TextAnalyzer textAnalyzer = new JaccardAnalyzer();
 
-        TextAnalyzer basicAnalyzer = new BasicAnalizer();
+        BasicAnalizer basicAnalyzer = new BasicAnalizer();
 
-        LCSAnalyzer lcsAnalyzer = new LCSAnalyzer();
+        TextAnalyzer lcsAnalyzer = new LCSAnalyzer();
 
         ITagAnalyzer tagAnalyzer = new TagAnalyzer();
 
         CosineAnalyser cosineAnalyser = new CosineAnalyser();
 
-        public List<(string, string)> AnalyzeDocuments(string documentName, string obfDocumentName)
+        string documentName;
+        string obfDocumentName;
+        FlowDocument document;
+        FlowDocument obfDocument;
+        string text;
+        string obfText;
+
+        public Analyzer(string documentName, string obfDocumentName)
         {
-            List<(string, string)> results = new List<(string, string)>();
+            this.documentName = documentName;
+            this.obfDocumentName = obfDocumentName;
 
-            FlowDocument document = Helpers.SetRTF(documentName);
-            FlowDocument obfDocument = Helpers.SetRTF(obfDocumentName);
+            document = Helpers.SetRTF(documentName);
+            obfDocument = Helpers.SetRTF(obfDocumentName);
 
-            string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
-            string obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text;
+            text = new TextRange(document.ContentStart, document.ContentEnd).Text;
+            obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text;
+        }
 
-            results.AddRange(textAnalyzer.AnalyzeText(text, obfText));
-            results.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
-            results.AddRange(lcsAnalyzer.AnalyzeText(text, obfText));
-            results.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
-            results.AddRange(cosineAnalyser.CalculateCosineSimilarity(text, obfText));
+        public Dictionary<string, double> AnalyzeDocuments()
+        {
+            Dictionary<string, double> results = new Dictionary<string, double>();
+
+            results.Add("Jaccart", textAnalyzer.AnalyzeText(text, obfText));
+            results.Add("LCS", lcsAnalyzer.AnalyzeText(text, obfText));
+            results.Add("Cosine similarity", cosineAnalyser.AnalyzeText(text, obfText));
 
             return results;
+        }
+
+        public List<Difference> GetDifferences()
+        {
+            List<Difference> differences = new List<Difference>();
+
+            differences.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
+            differences.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
+
+            return differences;
         }
     }
 }
