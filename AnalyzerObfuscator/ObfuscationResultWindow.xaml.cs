@@ -70,6 +70,7 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
                 {
                     using StreamWriter file = new StreamWriter(openFileDialog.FileName, true);
                     file.WriteLine(obfDoc);
+                    MessageBox.Show("File saved", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception _)
                 {
