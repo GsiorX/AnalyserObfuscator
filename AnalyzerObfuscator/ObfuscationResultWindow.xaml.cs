@@ -63,6 +63,7 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.ValidateNames = false;
             openFileDialog.CheckFileExists = false;
+            openFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
 
             if (openFileDialog.ShowDialog() == true)
             {

@@ -30,7 +30,7 @@ namespace AnalyzerObfuscator
             {
                 string tag = verb.Tags[rand.Next(0, verb.Tags.Count)];
                 var n = Noun.GetByTag(Vocabulary.nouns, tag);
-                if (n.Count > 0 )
+                if (n.Count > 0)
                 {
                     var cn = n[(rand.Next(0, n.Count))];
                     return String.Format("{0} {1} {2} is {3}ing {4} {5}.", capitalize(advParticle), adv, subject, verb.Text, cn.Particle, cn.Text);
