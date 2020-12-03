@@ -6,17 +6,41 @@ namespace AnalyzerObfuscator
 {
     class TagAnalyzer : ITagAnalyzer
     {
-        public List<(string, string)> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader)
+        public List<Difference> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader)
         {
-            List<(string, string)> documentNodeCount = AnalyzeXml(docReader, "document");
-            List<(string, string)> obfNodeCount = AnalyzeXml(obfReader, "obfuscated document");
+            Dictionary<string, int> documentNodeCount = AnalyzeXml(docReader);
+            Dictionary<string, int> obfNodeCount = AnalyzeXml(obfReader);
 
-            documentNodeCount.AddRange(obfNodeCount);
+            List<Difference> differences = new List<Difference>();
 
-            return documentNodeCount;
+            foreach (KeyValuePair<string, int> entry in documentNodeCount)
+            {
+                if(!differences.Any(d => d.Name == entry.Key))
+                {
+                    differences.Add(new Difference{ Name = entry.Key, DocumentValue = entry.Value, ObfuscatedDocumentValue = 0});
+                }
+                else
+                {
+                    differences[differences.FindIndex(d => d.Name == entry.Key)].DocumentValue = entry.Value;
+                }
+            }
+
+            foreach (KeyValuePair<string, int> entry in obfNodeCount)
+            {
+                if (!differences.Any(d => d.Name == entry.Key))
+                {
+                    differences.Add(new Difference { Name = entry.Key, DocumentValue = 0, ObfuscatedDocumentValue = entry.Value });
+                }
+                else
+                {
+                    differences[differences.FindIndex(d => d.Name == entry.Key)].ObfuscatedDocumentValue = entry.Value;
+                }
+            }
+
+            return differences;
         }
 
-        public List<(string, string)> AnalyzeXml(System.Xml.XmlReader reader, string docName)
+        public Dictionary<string, int> AnalyzeXml(System.Xml.XmlReader reader)
         {
             Dictionary<string, int> nodeCount = new Dictionary<string, int>();
 
@@ -24,24 +48,19 @@ namespace AnalyzerObfuscator
 
             foreach (var tagName in readerDoc.Root.DescendantNodes().OfType<XElement>().Select(x => x.Name))
             {
-                if (!nodeCount.ContainsKey(tagName.LocalName))
+                string tag = tagName.LocalName + "s";
+
+                if (!nodeCount.ContainsKey(tag))
                 {
-                    nodeCount.Add(tagName.LocalName, 1);
+                    nodeCount.Add(tag, 1);
                 }
                 else
                 {
-                    nodeCount[tagName.LocalName]++;
+                    nodeCount[tag]++;
                 }
             }
 
-            List<(string, string)> listNodeCount = new List<(string, string)>();
-
-            foreach (KeyValuePair<string, int> entry in nodeCount)
-            {
-                listNodeCount.Add(("Number of " + entry.Key + "s in " + docName, entry.Value.ToString()));
-            }
-
-            return listNodeCount;
+            return nodeCount;
         }
     }
 }

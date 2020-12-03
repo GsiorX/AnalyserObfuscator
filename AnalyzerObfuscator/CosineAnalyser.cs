@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AnalyzerObfuscator
 {
-    class CosineAnalyser
+    class CosineAnalyser : TextAnalyzer
     {
         public List<int> getVector(string text)
         {
@@ -24,10 +24,8 @@ namespace AnalyzerObfuscator
             return vector;
         }
 
-        public List<(string, string)> CalculateCosineSimilarity(string text, string obfText)
+        public double AnalyzeText(string text, string obfText)
         {
-            List<(string, string)> cosine = new List<(string, string)>();
-
             List<int> textVector = getVector(text);
             List<int> obfTextVector = getVector(obfText);
 
@@ -42,9 +40,7 @@ namespace AnalyzerObfuscator
                 mag2 += Math.Pow(obfTextVector[i], 2);
             }
 
-            cosine.Add(("Cosine similarity", (dot / (Math.Sqrt(mag1) * Math.Sqrt(mag2))).ToString()));
-
-            return cosine;
+            return dot / (Math.Sqrt(mag1) * Math.Sqrt(mag2));
         }
     }
 }

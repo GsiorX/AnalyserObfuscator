@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AnalyzerObfuscator
 {
-    class BasicAnalizer : TextAnalyzer
+    class BasicAnalizer
     {
-        public List<(string, string)> AnalyzeSingleText(string text, string name)
+        public Dictionary<string, double> AnalyzeSingleText(string text)
         {
             double wordCount = 0, sentenceCount = 0, lettersCount = 0, wordPerSentResult = 0, lettersPerWordResult = 0; ;
             const char dot = '.', exclamation = '!', question = '?';
@@ -59,21 +57,31 @@ namespace AnalyzerObfuscator
             wordPerSentResult /= sentenceCount;
             lettersPerWordResult /= wordCount;
 
-            return new List<(string, string)>() {
-                ("Number of letters in " + name, lettersCount.ToString()),
-                ("Number of words in " + name, wordCount.ToString()),
-                ("Number of sentences in " + name, sentenceCount.ToString()),
-                ("Average number of words in a sentence in " + name, Math.Round(wordPerSentResult, 2).ToString()),
-                ("Average number of letters in a word in " + name, Math.Round(lettersPerWordResult, 2).ToString())};
+            return new Dictionary<string, double>()
+            {
+                { "lettersCount", lettersCount },
+                { "wordCount", wordCount },
+                { "sentenceCount", sentenceCount },
+                { "wordPerSentResult", Math.Round(wordPerSentResult, 2) },
+                { "lettersPerWordResult", Math.Round(lettersPerWordResult, 2) }
+            };
         }
-        public List<(string, string)> AnalyzeText(string text, string obfuscated)
+
+        public List<Difference> AnalyzeText(string text, string obfuscated)
         {
-            List<(string, string)> ares = AnalyzeSingleText(text, "a");
-            List<(string, string)> bres = AnalyzeSingleText(obfuscated, "b");
+            Dictionary<string, double> ares = AnalyzeSingleText(text);
+            Dictionary<string, double> bres = AnalyzeSingleText(obfuscated);
 
-            ares.AddRange(bres);
+            List<Difference> differences = new List<Difference>()
+            {
+                (new Difference{ Name="Number of letters", DocumentValue=ares["lettersCount"], ObfuscatedDocumentValue=bres["lettersCount"] }),
+                (new Difference{ Name="Number of words", DocumentValue=ares["wordCount"], ObfuscatedDocumentValue=bres["wordCount"] }),
+                (new Difference{ Name="Number of sentences", DocumentValue=ares["sentenceCount"], ObfuscatedDocumentValue=bres["sentenceCount"] }),
+                (new Difference{ Name="Number of words in a sentence", DocumentValue=ares["wordPerSentResult"], ObfuscatedDocumentValue=bres["wordPerSentResult"] }),
+                (new Difference{ Name="Number of letters in a word", DocumentValue=ares["lettersPerWordResult"], ObfuscatedDocumentValue=bres["lettersPerWordResult"] }),
+            };
 
-            return ares;
+            return differences;
         }
     }
 }

@@ -31,25 +31,11 @@ namespace AnalyzerObfuscator
 
         protected void Analyse()
         {
-            Analyzer analyzer = new Analyzer();
+            Analyzer analyzer = new Analyzer(_documentName, _obfDocumentName);
             // Analyse documents
-            List<(string, string)> res = analyzer.AnalyzeDocuments(_documentName, _obfDocumentName);
-            int i = 1;
-            foreach ((string, string) row in res)
-            {
-                System.Windows.Controls.TextBox txt = new System.Windows.Controls.TextBox();
-                txt.Text = row.Item1;
-                Grid.SetColumn(txt, 1);
-                Grid.SetRow(txt, i);
-                resultsGrid.Children.Add(txt);
+            differences.ItemsSource = analyzer.GetDifferences();
 
-                System.Windows.Controls.TextBox txt2 = new System.Windows.Controls.TextBox();
-                txt2.Text = row.Item2.ToString();
-                Grid.SetColumn(txt2, 2);
-                Grid.SetRow(txt2, i);
-                resultsGrid.Children.Add(txt2);
-                i++;
-            }
+            algorithms.ItemsSource = analyzer.AnalyzeDocuments();
         }
     }
 }
