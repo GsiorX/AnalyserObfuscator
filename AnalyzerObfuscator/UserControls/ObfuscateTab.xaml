@@ -16,13 +16,44 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="16" Width="294">Select document to obfuscate</TextBlock>
         <Button Grid.Row="1" Name="btnOpenFile" Click="btnOpenFile_Click" Margin="10,21,10,16" Grid.Column="1">Open document a</Button>
         <TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Name="file1" Margin="10,21,10,16"/>
 
-        <Button Grid.Row="3" Grid.Column="2" x:Name="next" Content="Next" Margin="10,19,10,18" Click="next_Click"/>
+        <TextBlock Grid.ColumnSpan="4" Grid.Row="2" HorizontalAlignment="Center">Choose algorithms to use</TextBlock>
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center">Add obfuscator</TextBlock>
+            <CheckBox Name="addObf" Grid.Column="1" Grid.Row="0"></CheckBox>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center">Generalization</TextBlock>
+            <CheckBox Name="generalizationObf" Grid.Column="1" Grid.Row="1"></CheckBox>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center">Passive voice</TextBlock>
+            <CheckBox Name="passiveObf" Grid.Column="1" Grid.Row="0"></CheckBox>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center">Synonyms</TextBlock>
+            <CheckBox Name="synonymObf" Grid.Column="1" Grid.Row="1"></CheckBox>
+        </Grid>
+        <Button Grid.Row="4" Grid.Column="2" x:Name="next" Content="Next" Margin="10,19,10,18" Click="next_Click"/>
     </Grid>
 </UserControl>
