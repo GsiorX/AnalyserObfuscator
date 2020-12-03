@@ -77,8 +77,8 @@ namespace AnalyzerObfuscator
                     sentence = String.Join(" ", splitSentence);
                 }
 
-                outputSentences.Add(Vocabulary.capitalize(sentence));
-                outputSentences.AddRange(tmpSentences);
+                outputSentences.Add(Vocabulary.capitalize(sentence.Trim()));
+                outputSentences.AddRange(tmpSentences.Select(s => Vocabulary.capitalize(s.Trim())));
             }
             return string.Join(".", outputSentences.ToArray());
         }        

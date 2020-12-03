@@ -36,9 +36,9 @@ namespace AnalyzerObfuscator
             text = text.Trim().Substring(0, text.Trim().Length - 1);
             List<IObfuscator> obfs = new List<IObfuscator>();
             if (obfsNames.Contains("gen")) obfs.Add(new GeneralizationObfuscator());
-            if (obfsNames.Contains("syn")) obfs.Add(new GeneralizationObfuscator());
-            if (obfsNames.Contains("pas")) obfs.Add(new GeneralizationObfuscator());
-            if (obfsNames.Contains("and")) obfs.Add(new GeneralizationObfuscator());
+            if (obfsNames.Contains("syn")) obfs.Add(new SynonymObfuscator());
+            if (obfsNames.Contains("pas")) obfs.Add(new PassiveObfuscator());
+            if (obfsNames.Contains("and")) obfs.Add(new AddObfuscator());
 
             //GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
             //SynonymObfuscator synObfs = new SynonymObfuscator();
@@ -54,8 +54,8 @@ namespace AnalyzerObfuscator
             //    //new AddObfuscator(),
             //};
 
-            string result = IObfuscator.JoinObf(obfs, text).Replace(".", ". ");
-            result = result + ".";
+            string result = IObfuscator.JoinObf(obfs, text).Replace(".", ". ") + ".";
+
             obfDoc = @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""
 ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">

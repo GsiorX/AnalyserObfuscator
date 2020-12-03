@@ -40,7 +40,13 @@ namespace AnalyzerObfuscator
         {
             FlowDocument document = Helpers.SetRTF(documentName);
 
-            ObfuscationResultWindow resultWindow = new ObfuscationResultWindow(document, new System.Collections.Generic.List<string>() { "gen", "syn", "pas", "and" });
+            var options = new System.Collections.Generic.List<string>();
+            if (addObf.IsChecked == true) options.Add("and");
+            if (passiveObf.IsChecked == true) options.Add("pas");
+            if (synonymObf.IsChecked == true) options.Add("syn");
+            if (generalizationObf.IsChecked == true) options.Add("gen");
+
+            ObfuscationResultWindow resultWindow = new ObfuscationResultWindow(document, options);
             resultWindow.Show();
         }
     }
