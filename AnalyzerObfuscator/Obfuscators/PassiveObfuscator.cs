@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace AnalyzerObfuscator
 {
     class PassiveObfuscator : IObfuscator
     {
-
+        private bool IsParticle(string word)
+        {
+            return word.ToLower().Equals("a") || word.ToLower().Equals("an") || word.ToLower().Equals("the");
+        }
         string MakePassive(string sentence)
         {
             int verbIdx = -1;
@@ -63,12 +67,45 @@ namespace AnalyzerObfuscator
 
             try
             {
-                splitSentence[n1Idx - 1] = n2.Particle;
-                splitSentence[n1Idx] = n2.Text;
+                int p1Idx = -1;
+                int p2Idx = -1;
+                if (n1Idx >= 1 && IsParticle(splitSentence[n1Idx - 1]))
+                {
+                    p1Idx = n1Idx - 1;
+                } else if (n1Idx >= 2 && IsParticle(splitSentence[n1Idx - 2]))
+                {
+                    p1Idx = n1Idx - 2;
+                }
 
-                splitSentence[n2Idx - 1] = n1.Particle;
+                if (n2Idx >= 1 && IsParticle(splitSentence[n2Idx - 1]))
+                {
+                    p2Idx = n2Idx - 1;
+                }
+                else if (n2Idx >= 2 && IsParticle(splitSentence[n2Idx - 2]))
+                {
+                    p2Idx = n2Idx - 2;
+                }
+                splitSentence[n1Idx] = n2.Text;
                 splitSentence[n2Idx] = n1.Text;
                 splitSentence[verbIdx] = "being " + verb.Text + "en by";
+
+                if (p1Idx > -1 && p2Idx > -1)
+                {
+                    splitSentence[p1Idx] = n2.Particle;
+                    splitSentence[p2Idx] = n1.Particle;
+
+                    if (p1Idx == n1Idx - 2)
+                    {
+                        splitSentence[p2Idx] += " " + splitSentence[n1Idx - 1];
+                        splitSentence[n1Idx - 1] = "";
+                    }
+
+                    if (p2Idx == n2Idx - 2)
+                    {
+                        splitSentence[p1Idx] += " " + splitSentence[n2Idx - 1];
+                        splitSentence[n2Idx - 1] = "";
+                    }
+                }
 
                 splitSentence[0] = Vocabulary.capitalize(splitSentence[0]);
 
