@@ -18,8 +18,8 @@ namespace AnalyzerObfuscator
         {
             InitializeComponent();
 
-            documentName = System.IO.Path.Combine(Environment.CurrentDirectory, @"..\\..\\..\\test documents\test1a.xaml");
-            file1.Text = "test1a.xaml";
+            documentName = System.IO.Path.Combine(Environment.CurrentDirectory, @"..\\..\\..\\test documents\testObf.xaml");
+            file1.Text = "testObf.xaml";
         }
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {

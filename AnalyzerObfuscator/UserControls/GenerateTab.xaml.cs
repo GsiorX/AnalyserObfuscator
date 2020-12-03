@@ -27,6 +27,7 @@ namespace AnalyzerObfuscator.UserControls
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.ValidateNames = false;
                 saveFileDialog.CheckFileExists = false;
+                saveFileDialog.FileName = "generated file.xaml";
                 saveFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
 
                 if (saveFileDialog.ShowDialog() == true)

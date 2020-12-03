@@ -71,17 +71,18 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.ValidateNames = false;
-            openFileDialog.CheckFileExists = false;
-            openFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.ValidateNames = false;
+            saveFileDialog.CheckFileExists = false;
+            saveFileDialog.FileName = "obfuscated file.xaml";
+            saveFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
 
-            if (openFileDialog.ShowDialog() == true)
+            if (saveFileDialog.ShowDialog() == true)
             {
                 try
                 {
-                    using StreamWriter file = new StreamWriter(openFileDialog.FileName, true);
-                    file.WriteLine(obfDoc);
+                    File.WriteAllText(saveFileDialog.FileName, obfDoc);
+
                     MessageBox.Show("File saved", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception _)
