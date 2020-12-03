@@ -6,6 +6,6 @@ namespace AnalyzerObfuscator
 {
     interface TextAnalyzer
     {
-        double AnalyzeText(string text, string obs);
+        string AnalyzeText(string text, string obs);
     }
 }
