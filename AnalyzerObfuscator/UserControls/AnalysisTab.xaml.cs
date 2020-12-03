@@ -64,7 +64,10 @@ namespace AnalyzerObfuscator
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
-            ResultWindow resultWindow = new ResultWindow(documentName, obfDocumentName);
+            Dictionary<string, int> parameters = new Dictionary<string, int>();
+            parameters.Add("numOfWords", Convert.ToInt32(numOfWords.Text));
+
+            ResultWindow resultWindow = new ResultWindow(documentName, obfDocumentName, parameters);
             resultWindow.Show();
         }
     }

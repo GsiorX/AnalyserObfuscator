@@ -7,7 +7,7 @@ namespace AnalyzerObfuscator
 {
     class MostCommonWords
     {
-        public Dictionary<string, int> Find(string text, int numOfWords = 5)
+        public Dictionary<string, int> Find(string text, int numOfWords)
         {   var delimiterChars = new char[] { ' ', ',', ':', '\t', '\"', '\r', '{', '}', '[', ']', '=', '/' };
 
             return text
@@ -21,10 +21,10 @@ namespace AnalyzerObfuscator
                  .ToDictionary(x => x.Word, x => x.Count);
         }
 
-        public List<MostCommonWordsResult> AnalyzeText(string text, string obfuscated)
+        public List<MostCommonWordsResult> AnalyzeText(string text, string obfuscated, int numOfWords = 5)
         {
-            Dictionary<string, int> Ares = Find(text);
-            Dictionary<string, int> Bres = Find(obfuscated);
+            Dictionary<string, int> Ares = Find(text, numOfWords);
+            Dictionary<string, int> Bres = Find(obfuscated, numOfWords);
 
             string resultA = "";
             string resultB = "";
