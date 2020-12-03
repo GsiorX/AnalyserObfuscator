@@ -62,5 +62,17 @@ namespace AnalyzerObfuscator
 
             return nodeCount;
         }
+
+
+        //public List<(string, int)> AnalizeTagStructure(System.Xml.XmlReader reader, string docName)
+        //{
+        //    XDocument readerDoc = XDocument.Load(reader);
+        //    List<(string, int)> textStructure = new List<(string, int)>();
+
+        //    foreach (var tagName in readerDoc.Root.DescendantNodes().OfType<XElement>().Select(x => x.Name))
+        //    {
+
+        //    }
+        //}
     }
 }

@@ -29,6 +29,14 @@ namespace AnalyzerObfuscator
             { "woman", new Noun("a", "woman", new List<string>(){ "person" }) },
             { "boy", new Noun("a", "boy", new List<string>(){ "person" }) },
             { "girl", new Noun("a", "girl", new List<string>(){ "person" }) },
+
+            { "child", new Noun("a", "child", new List<string>(){ "person" }) },
+            { "father", new Noun("a", "father", new List<string>(){ "person" }) },
+            { "mother", new Noun("a", "mother", new List<string>(){ "person" }) },
+            { "hat", new Noun("a", "hat", new List<string>(){ "object" }) },
+            { "book", new Noun("a", "book", new List<string>(){ "object" }) },
+            { "student", new Noun("a", "student", new List<string>(){ "person" }) },
+            { "surgeon", new Noun("a", "surgeon", new List<string>(){ "person" }) }
         };
 
         public static readonly Dictionary<string, Noun> nouns = new Dictionary<string, Noun>() {
@@ -49,6 +57,10 @@ namespace AnalyzerObfuscator
             { "asian", "an" },
             { "british", "a" },
             { "pink", "a" },
+            { "red", "a" },
+            { "precise", "a" },
+            { "caring", "a" },
+            { "business", "a" }
         };
 
         public static readonly string[] verbsOld = {
@@ -56,6 +68,7 @@ namespace AnalyzerObfuscator
             "walk",
             "runn",
             "talk",
+            "wear",
         };
 
         public static readonly List<Verb> verbs = new List<Verb>() {
@@ -85,6 +98,15 @@ namespace AnalyzerObfuscator
             { "woman", ("a", "person") },
             { "boy", ("a", "person") },
             { "girl", ("a", "person") },
+            { "hat", ("an", "object") },
+            { "surgeon", ("a", "person") },
+            { "mother", ("a", "person") },
+            { "father", ("a", "person") },
+            { "child", ("a", "person") },
+            { "student", ("a", "person") },
+            { "book", ("an", "object") },
+            { "business", ("an", "object") },
+            { "country", ("an", "object") },
         };
 
         public static readonly Dictionary<string, (string, string)> synonyms = new Dictionary<string, (string, string)>() {
@@ -93,6 +115,14 @@ namespace AnalyzerObfuscator
             { "man", ("a", "guy") },
             { "boy", ("a", "lad") },
             { "girl", ("a", "young lady") },
+            { "hat", ("a", "titfer") },
+            { "surgeon", ("a", "doctor") },
+            { "mother", ("a", "mom") },
+            { "father", ("a", "dad") },
+            { "child", ("a", "kid") },
+            { "student", ("a", "graduate") },
+            { "book", ("a", "notebook") },
+            { "business", ("a", "company") },
         };
     }
 }

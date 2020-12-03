@@ -33,7 +33,12 @@ namespace AnalyzerObfuscator
         {
             Analyzer analyzer = new Analyzer(_documentName, _obfDocumentName);
             // Analyse documents
-            differences.ItemsSource = analyzer.GetDifferences();
+            List<Object> diff = new List<object>();
+
+            diff.AddRange(analyzer.GetDifferences());
+            diff.AddRange(analyzer.GetMostCommonWords());
+
+            differences.ItemsSource = diff;
 
             algorithms.ItemsSource = analyzer.AnalyzeDocuments();
         }

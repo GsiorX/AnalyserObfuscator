@@ -8,7 +8,7 @@ namespace AnalyzerObfuscator
         public Dictionary<string, double> AnalyzeSingleText(string text)
         {
             double wordCount = 0, sentenceCount = 0, lettersCount = 0, wordPerSentResult = 0, lettersPerWordResult = 0; ;
-            const char dot = '.', exclamation = '!', question = '?';
+            const char dot = '.';
 
             int index = 0, wordPerSentIndex = 0, lettersPerWordIndex = 0; ;
             List<int> wordsPerSentence = new List<int>();
@@ -28,6 +28,7 @@ namespace AnalyzerObfuscator
                     lettersPerWordIndex++;
                 }
 
+                //count words
                 wordCount++;
                 lettersPerWord.Add(lettersPerWordIndex);
                 lettersPerWordIndex = 0;
@@ -67,7 +68,7 @@ namespace AnalyzerObfuscator
             };
         }
 
-        public List<Difference> AnalyzeText(string text, string obfuscated)
+       public List<Difference> AnalyzeText(string text, string obfuscated)
         {
             Dictionary<string, double> ares = AnalyzeSingleText(text);
             Dictionary<string, double> bres = AnalyzeSingleText(obfuscated);
@@ -83,5 +84,7 @@ namespace AnalyzerObfuscator
 
             return differences;
         }
+
+
     }
 }
