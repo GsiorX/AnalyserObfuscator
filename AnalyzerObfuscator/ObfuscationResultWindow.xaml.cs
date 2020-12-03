@@ -39,7 +39,7 @@ namespace AnalyzerObfuscator
                 new PassiveObfuscator(),
                 new AddObfuscator(),
             };
-            textBlock.Text = IObfuscator.JoinObf(obfs, text);
+            textBlock.Text = IObfuscator.JoinObf(obfs, text) + ".";
         }
     }
 }

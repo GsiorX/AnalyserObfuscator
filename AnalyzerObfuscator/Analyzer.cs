@@ -35,9 +35,9 @@ namespace AnalyzerObfuscator
             obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text;
         }
 
-        public Dictionary<string, double> AnalyzeDocuments()
+        public Dictionary<string, string> AnalyzeDocuments()
         {
-            Dictionary<string, double> results = new Dictionary<string, double>();
+            Dictionary<string, string> results = new Dictionary<string, string>();
 
             results.Add("Jaccart", textAnalyzer.AnalyzeText(text, obfText));
             results.Add("LCS", lcsAnalyzer.AnalyzeText(text, obfText));

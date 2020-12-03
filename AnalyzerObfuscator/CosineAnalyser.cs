@@ -24,7 +24,7 @@ namespace AnalyzerObfuscator
             return vector;
         }
 
-        public double AnalyzeText(string text, string obfText)
+        public string AnalyzeText(string text, string obfText)
         {
             List<int> textVector = getVector(text);
             List<int> obfTextVector = getVector(obfText);
@@ -40,7 +40,7 @@ namespace AnalyzerObfuscator
                 mag2 += Math.Pow(obfTextVector[i], 2);
             }
 
-            return dot / (Math.Sqrt(mag1) * Math.Sqrt(mag2));
+            return (dot / (Math.Sqrt(mag1) * Math.Sqrt(mag2))).ToString();
         }
     }
 }
