@@ -23,34 +23,45 @@ namespace AnalyzerObfuscator
     public partial class ObfuscationResultWindow : Window
     {
         private string obfDoc = "";
-        public ObfuscationResultWindow(FlowDocument document)
+        public ObfuscationResultWindow(FlowDocument document, List<string> obfs)
         {
             InitializeComponent();
-            Analyze(document);
+            Analyze(document, obfs);
         }
 
-        void Analyze(FlowDocument document)
+        void Analyze(FlowDocument document, List<string> obfsNames)
         {
+
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
+            text = text.Trim().Substring(0, text.Trim().Length - 1);
+            List<IObfuscator> obfs = new List<IObfuscator>();
+            if (obfsNames.Contains("gen")) obfs.Add(new GeneralizationObfuscator());
+            if (obfsNames.Contains("syn")) obfs.Add(new GeneralizationObfuscator());
+            if (obfsNames.Contains("pas")) obfs.Add(new GeneralizationObfuscator());
+            if (obfsNames.Contains("and")) obfs.Add(new GeneralizationObfuscator());
+
             //GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
             //SynonymObfuscator synObfs = new SynonymObfuscator();
             //PassiveObfuscator pasObfs = new PassiveObfuscator();
             //string genObfsRes = genObfs.ObfuscateText(text);
             //string pasObfsRes = pasObfs.ObfuscateText(genObfsRes);
             //string synObfsRes = synObfs.ObfuscateText(pasObfsRes);
-            List<IObfuscator> obfs = new List<IObfuscator>()
-            {
-                new GeneralizationObfuscator(),
-                new SynonymObfuscator(),
-                new PassiveObfuscator(),
-                new AddObfuscator(),
-            };
+            //List<IObfuscator> obfs = new List<IObfuscator>()
+            //{
+            //    //new GeneralizationObfuscator(),
+            //    //new SynonymObfuscator(),
+            //    //new PassiveObfuscator(),
+            //    //new AddObfuscator(),
+            //};
+
+            string result = IObfuscator.JoinObf(obfs, text).Replace(".", ". ");
+            result = result + ".";
             obfDoc = @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""
 ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">
 
 <Paragraph>
-" + IObfuscator.JoinObf(obfs, text) + "." +
+" + result +
 @"
 </Paragraph>
 </FlowDocument>";
