@@ -8,7 +8,7 @@ namespace AnalyzerObfuscator
     class MostCommonWords
     {
         public Dictionary<string, int> Find(string text, int numOfWords)
-        {   var delimiterChars = new char[] { ' ', ',', ':', '\t', '\"', '\r', '{', '}', '[', ']', '=', '/' };
+        {   var delimiterChars = new char[] { ' ', ',', ':', '\t', '\"', '\r', '{', '}', '[', ']', '=', '/', '.' };
 
             return text
                  .Split(delimiterChars)
@@ -32,17 +32,17 @@ namespace AnalyzerObfuscator
 
             foreach (KeyValuePair<string, int> pair in Ares)
             {
-                resultA += pair.Key.ToString() + ":" + pair.Value.ToString() + "\n";
+                resultA += pair.Key.ToString() + " : " + pair.Value.ToString() + "\n";
             }
 
             foreach (KeyValuePair<string, int> pair in Bres)
             {
-                resultB += pair.Key.ToString() + ":" + pair.Value.ToString() + "\n";
+                resultB += pair.Key.ToString() + " : " + pair.Value.ToString() + "\n";
             }
 
             List<MostCommonWordsResult> differencesInWords = new List<MostCommonWordsResult>()
             {
-                (new MostCommonWordsResult{ Name="The most frequently used words ", DocumentValue= resultA, ObfuscatedDocumentValue= resultB})
+                (new MostCommonWordsResult{ Name ="The most frequently used words \n in document [word : count] ", DocumentValue = resultA, ObfuscatedDocumentValue = resultB})
             };
 
             return differencesInWords;
