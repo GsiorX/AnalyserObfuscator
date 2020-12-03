@@ -19,19 +19,21 @@ namespace AnalyzerObfuscator
     {
         string _documentName;
         string _obfDocumentName;
-        public ResultWindow(string documentName, string obfDocumentName)
+        Dictionary<string, int> _parameters;
+        public ResultWindow(string documentName, string obfDocumentName, Dictionary<string, int> parameters)
         {
             InitializeComponent();
 
             _documentName = documentName;
             _obfDocumentName = obfDocumentName;
+            _parameters = parameters;
 
             Analyse();
         }
 
         protected void Analyse()
         {
-            Analyzer analyzer = new Analyzer(_documentName, _obfDocumentName);
+            Analyzer analyzer = new Analyzer(_documentName, _obfDocumentName, _parameters);
             // Analyse documents
             List<Object> diff = new List<object>();
 

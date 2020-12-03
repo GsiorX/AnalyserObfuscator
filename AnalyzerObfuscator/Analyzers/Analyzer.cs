@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Documents;
-using System.Windows.Markup;
 
 namespace AnalyzerObfuscator
 {
@@ -18,23 +17,26 @@ namespace AnalyzerObfuscator
 
         CosineAnalyser cosineAnalyser = new CosineAnalyser();
 
-        string documentName;
-        string obfDocumentName;
+        string _documentName;
+        string _obfDocumentName;
         FlowDocument document;
         FlowDocument obfDocument;
         string text;
         string obfText;
+        Dictionary<string, int> _parameters;
 
-        public Analyzer(string documentName, string obfDocumentName)
+        public Analyzer(string documentName, string obfDocumentName, Dictionary<string, int> parameters)
         {
-            this.documentName = documentName;
-            this.obfDocumentName = obfDocumentName;
+            _documentName = documentName;
+            _obfDocumentName = obfDocumentName;
 
             document = Helpers.SetRTF(documentName);
             obfDocument = Helpers.SetRTF(obfDocumentName);
 
             text = new TextRange(document.ContentStart, document.ContentEnd).Text;
             obfText = new TextRange(obfDocument.ContentStart, obfDocument.ContentEnd).Text;
+
+            _parameters = parameters;
         }
 
         public Dictionary<string, string> AnalyzeDocuments()
@@ -53,18 +55,18 @@ namespace AnalyzerObfuscator
             List<Difference> differences = new List<Difference>();
 
             differences.AddRange(basicAnalyzer.AnalyzeText(text, obfText));
-            differences.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
+            differences.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(_documentName), Helpers.GetReader(_obfDocumentName)));
 
             return differences;
         }
 
         public List<MostCommonWordsResult> GetMostCommonWords()
         {
-           List<MostCommonWordsResult> mostCommonUsedWordsInFiles = new List<MostCommonWordsResult> ();
+            List<MostCommonWordsResult> mostCommonUsedWordsInFiles = new List<MostCommonWordsResult>();
 
-           mostCommonUsedWordsInFiles.AddRange(mostCommonWordsAnalyzer.AnalyzeText(text, obfText));
+            mostCommonUsedWordsInFiles.AddRange(mostCommonWordsAnalyzer.AnalyzeText(text, obfText, _parameters["numOfWords"]));
 
-           return mostCommonUsedWordsInFiles;
+            return mostCommonUsedWordsInFiles;
         }
     }
 }

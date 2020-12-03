@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AnalyzerObfuscator
 {
-    class AddObfuscator : IObfuscator
+    class AndObfuscator : IObfuscator
     {
         public string ObfuscateText(string text)
         {

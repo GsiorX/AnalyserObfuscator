@@ -38,7 +38,7 @@ namespace AnalyzerObfuscator
             if (obfsNames.Contains("gen")) obfs.Add(new GeneralizationObfuscator());
             if (obfsNames.Contains("syn")) obfs.Add(new SynonymObfuscator());
             if (obfsNames.Contains("pas")) obfs.Add(new PassiveObfuscator());
-            if (obfsNames.Contains("and")) obfs.Add(new AddObfuscator());
+            if (obfsNames.Contains("and")) obfs.Add(new AndObfuscator());
 
             //GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
             //SynonymObfuscator synObfs = new SynonymObfuscator();

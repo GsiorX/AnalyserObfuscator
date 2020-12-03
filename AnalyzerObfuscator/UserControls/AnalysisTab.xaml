@@ -18,14 +18,16 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="16" Width="294">Select documents to analyze</TextBlock>
         <Button Grid.Row="1" Name="btnOpenFile" Click="btnOpenFile_Click" Margin="10,21,10,16" Grid.Column="1">Open document a</Button>
-        <TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Name="file1" Margin="10,21,10,16"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Name="file1" Margin="10,21,10,16" VerticalAlignment="Center"/>
 
         <Button Grid.Row="2" Grid.Column="1" Name="btnOpenFile2" Click="btnOpenFile2_Click" Margin="10,21,10,15">Open document b</Button>
-        <TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Name="file2" Margin="10,19,17,17"/>
-
-        <Button Grid.Row="3" Grid.Column="2" x:Name="next" Content="Next" Margin="10,19,10,18" Click="next_Click"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Name="file2" Margin="10,19,17,17" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">Number of words</TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Name="numOfWords"></TextBox>
+        <Button Grid.Row="4" Grid.Column="2" x:Name="next" Content="Next" Margin="10,19,10,18" Click="next_Click"/>
     </Grid>
 </UserControl>
