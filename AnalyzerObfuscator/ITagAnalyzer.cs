@@ -6,7 +6,10 @@ namespace AnalyzerObfuscator
 {
     interface ITagAnalyzer
     {
+
         public List<Difference> AnalyzeXmls(System.Xml.XmlReader docReader, System.Xml.XmlReader obfReader);
         public Dictionary<string, int> AnalyzeXml(System.Xml.XmlReader reader);
+        //public Dictionary<string, int> AnalizeTagStructure(System.Xml.XmlReader reader, string docName);
+
     }
 }

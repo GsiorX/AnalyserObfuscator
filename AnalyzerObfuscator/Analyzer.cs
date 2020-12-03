@@ -14,6 +14,8 @@ namespace AnalyzerObfuscator
 
         ITagAnalyzer tagAnalyzer = new TagAnalyzer();
 
+        MostCommonWords mostCommonWordsAnalyzer = new MostCommonWords();
+
         CosineAnalyser cosineAnalyser = new CosineAnalyser();
 
         string documentName;
@@ -54,6 +56,15 @@ namespace AnalyzerObfuscator
             differences.AddRange(tagAnalyzer.AnalyzeXmls(Helpers.GetReader(documentName), Helpers.GetReader(obfDocumentName)));
 
             return differences;
+        }
+
+        public List<MostCommonWordsResult> GetMostCommonWords()
+        {
+           List<MostCommonWordsResult> mostCommonUsedWordsInFiles = new List<MostCommonWordsResult> ();
+
+           mostCommonUsedWordsInFiles.AddRange(mostCommonWordsAnalyzer.AnalyzeText(text, obfText));
+
+           return mostCommonUsedWordsInFiles;
         }
     }
 }
