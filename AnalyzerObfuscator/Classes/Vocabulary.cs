@@ -74,14 +74,14 @@ namespace AnalyzerObfuscator
         public static readonly List<Verb> verbs = new List<Verb>() {
             new Verb("eat", new List<string>() { "food" }).SetPassive(),
             new Verb("walk", new List<string>() { "place" }),
-            new Verb("run", new List<string>() { "place" }),
+            new Verb("run", new List<string>() { "place" }).SetContinuous("running"),
             new Verb("talk", new List<string>() { "person" }),
         };
 
         public static readonly Dictionary<string, string> verbTags = new Dictionary<string, string>() {
             { "eat", "food" },
             { "walk", "place" },
-            { "runn", "place" },
+            { "run", "place" },
         };
 
         public static readonly string[] verbsPassive = {

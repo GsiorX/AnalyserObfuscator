@@ -43,6 +43,8 @@ namespace AnalyzerObfuscator
                         givenSubject = subject.Key;
 
                         Vocabulary.subjects.TryGetValue(subject.Key, out Noun noun);
+                        if (noun == null) break;
+
                         tmpSentences.Add("The " + subject.Value.Item2 + " is " + noun.Particle + " " + subject.Key);
                         break;
                     }
