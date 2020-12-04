@@ -19,6 +19,11 @@ namespace AnalyzerObfuscator
             return char.ToLower(word[0]) + word.Substring(1);
         }
 
+        public static bool IsParticle(string word)
+        {
+            return word.ToLower().Equals("a") || word.ToLower().Equals("an") || word.ToLower().Equals("the");
+        }
+
         public static readonly Dictionary<string, Noun> subjects = new Dictionary<string, Noun>() {
             { "animal", new Noun("an", "animal", new List<string>(){ "animal" }) },
             { "dog", new Noun("a", "dog", new List<string>(){ "animal" }) },
