@@ -33,11 +33,11 @@ namespace AnalyzerObfuscator
                 if (n.Count > 0)
                 {
                     var cn = n[(rand.Next(0, n.Count))];
-                    return String.Format("{0} {1} {2} is {3}ing {4} {5}.", capitalize(advParticle), adv, subject, verb.Text, cn.Particle, cn.Text);
+                    return String.Format("{0} {1} {2} is {3} {4} {5}.", capitalize(advParticle), adv, subject, verb.Continuous, cn.Particle, cn.Text);
                 }
             }
 
-            return String.Format("{0} {1} {2} is {3}ing.", capitalize(advParticle), adv, subject, verb.Text);
+            return String.Format("{0} {1} {2} is {3}.", capitalize(advParticle), adv, subject, verb.Continuous);
         }
 
         public static string generateText(int length)
