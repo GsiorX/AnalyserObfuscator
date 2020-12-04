@@ -60,15 +60,6 @@ namespace AnalyzerObfuscator
             { "red", "a" },
             { "precise", "a" },
             { "caring", "a" },
-            { "business", "a" }
-        };
-
-        public static readonly string[] verbsOld = {
-            "eat",
-            "walk",
-            "runn",
-            "talk",
-            "wear",
         };
 
         public static readonly List<Verb> verbs = new List<Verb>() {
