@@ -25,24 +25,21 @@ namespace AnalyzerObfuscator
                 {
                     if (splitSentence.Contains(subject.Key))
                     {
-                        if (splitSentence.Contains("a " + subject.Key))
+                        int idxOfSub = splitSentence.IndexOf(subject.Key);
+                        if (idxOfSub >= 1 && Vocabulary.IsParticle(splitSentence[idxOfSub - 1]))
                         {
-                            int idx = splitSentence.IndexOf("a " + subject.Key);
-                            splitSentence[idx] = subject.Value.Item1 + " " + subject.Value.Item2;
-                        }
-                        else if (splitSentence.Contains("an " + subject.Key))
+                            splitSentence[idxOfSub - 1] = subject.Value.Item1;
+                        } else if (idxOfSub >= 2 && Vocabulary.IsParticle(splitSentence[idxOfSub - 2]))
                         {
-                            int idx = splitSentence.IndexOf("an " + subject.Key);
-                            splitSentence[idx] = subject.Value.Item1 + " " + subject.Value.Item2;
+                            splitSentence[idxOfSub - 2] = subject.Value.Item1;
                         }
-                        else
-                        {
-                            int idx = splitSentence.IndexOf(subject.Key);
-                            splitSentence[idx] = subject.Value.Item2;
-                        }
+                        splitSentence[idxOfSub] = subject.Value.Item2;
+
                         givenSubject = subject.Key;
 
                         Vocabulary.subjects.TryGetValue(subject.Key, out Noun noun);
+                        if (noun == null) break;
+
                         tmpSentences.Add("The " + subject.Value.Item2 + " is " + noun.Particle + " " + subject.Key);
                         break;
                     }

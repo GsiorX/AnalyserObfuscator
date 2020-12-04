@@ -19,6 +19,11 @@ namespace AnalyzerObfuscator
             return char.ToLower(word[0]) + word.Substring(1);
         }
 
+        public static bool IsParticle(string word)
+        {
+            return word.ToLower().Equals("a") || word.ToLower().Equals("an") || word.ToLower().Equals("the");
+        }
+
         public static readonly Dictionary<string, Noun> subjects = new Dictionary<string, Noun>() {
             { "animal", new Noun("an", "animal", new List<string>(){ "animal" }) },
             { "dog", new Noun("a", "dog", new List<string>(){ "animal" }) },
@@ -60,28 +65,19 @@ namespace AnalyzerObfuscator
             { "red", "a" },
             { "precise", "a" },
             { "caring", "a" },
-            { "business", "a" }
-        };
-
-        public static readonly string[] verbsOld = {
-            "eat",
-            "walk",
-            "runn",
-            "talk",
-            "wear",
         };
 
         public static readonly List<Verb> verbs = new List<Verb>() {
             new Verb("eat", new List<string>() { "food" }).SetPassive(),
             new Verb("walk", new List<string>() { "place" }),
-            new Verb("run", new List<string>() { "place" }),
+            new Verb("run", new List<string>() { "place" }).SetContinuous("running"),
             new Verb("talk", new List<string>() { "person" }),
         };
 
         public static readonly Dictionary<string, string> verbTags = new Dictionary<string, string>() {
             { "eat", "food" },
             { "walk", "place" },
-            { "runn", "place" },
+            { "run", "place" },
         };
 
         public static readonly string[] verbsPassive = {
