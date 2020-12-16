@@ -24,18 +24,9 @@ namespace AnalyzerObfuscator.UserControls
 
             if (textLength > 0)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.ValidateNames = false;
-                saveFileDialog.CheckFileExists = false;
-                saveFileDialog.FileName = "generated file.xaml";
-                saveFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
-
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    File.WriteAllText(saveFileDialog.FileName, TextGenerator.generateFlowText(textLength));
-
-                    MessageBox.Show("File saved", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                string generatedDocument = TextGenerator.generateFlowText(textLength);
+                GenerationResultWindow resultWindow = new GenerationResultWindow(generatedDocument);
+                resultWindow.Show();
             }
         }
     }
