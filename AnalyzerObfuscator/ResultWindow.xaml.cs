@@ -29,6 +29,10 @@ namespace AnalyzerObfuscator
             _parameters = parameters;
 
             Analyse();
+
+            // Display documents being analysed
+            originalDocument.Document = Helpers.SetRTF(_documentName);
+            obfuscatedDocument.Document = Helpers.SetRTF(_obfDocumentName);
         }
 
         protected void Analyse()
