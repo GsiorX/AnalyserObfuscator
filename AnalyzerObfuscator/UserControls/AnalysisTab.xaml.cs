@@ -35,6 +35,7 @@ namespace AnalyzerObfuscator
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
 
             Nullable<bool> result = openFileDialog.ShowDialog();
 
@@ -50,6 +51,7 @@ namespace AnalyzerObfuscator
         private void btnOpenFile2_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Xaml file (*.xaml)|*.xaml";
 
             Nullable<bool> result = openFileDialog.ShowDialog();
 
