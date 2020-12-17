@@ -6,6 +6,11 @@ namespace AnalyzerObfuscator
 {
     public class TextGenerator
     {
+        private static readonly Random rand = new Random();
+        private static bool GetRandomTruth(double prop)
+        {
+            return rand.Next(1000) < prop * 1000;
+        }
 
         private static string capitalize(string word)
         {
@@ -13,20 +18,23 @@ namespace AnalyzerObfuscator
 
             return char.ToUpper(word[0]) + word.Substring(1);
         }
-        static string generateSentence(Random rand, Noun psub = null)
+        static string generateSentence(Noun psub = null)
         {
+            const double adjProp = 0.6;
+            const double secAdjProp = 0.4;
+            const double continuousProp = 0.3;
+            const double theProp = 0.3;
+            const double someProp = 0.4;
+            const double nextSentenceProp = 0.6;
+
+
             int nounId = rand.Next(0, Vocabulary.subjects.Count);
-            // int advId = rand.Next(0, Vocabulary.adjectives.Count);
             int verbId = rand.Next(0, Vocabulary.verbs.Count);
 
             var subParticlePair = Enumerable.ToList(Vocabulary.subjects)[nounId];
-            // var advParticlePair = Enumerable.ToList(Vocabulary.adjectives)[advId];
-            // var nounParticle = nounParticlePair.Value;
-            var nsub = (psub == null) ? subParticlePair.Value : psub;
+            var nsub = psub ?? subParticlePair.Value;
             var subject = (psub == null) ? subParticlePair.Key : psub.Text;
             var subjectParticle = (psub == null) ? subParticlePair.Value.Particle : psub.Particle;
-            // var adv = advParticlePair.Key;
-            // var advParticle = advParticlePair.Value;
             var verb = Vocabulary.verbs[verbId];
 
             if (verb.Tags.Count > 0)
@@ -45,9 +53,9 @@ namespace AnalyzerObfuscator
                 }
             }
 
-            bool isContinuous = rand.NextDouble() < 0.2;
-            int numberOfAdj = psub == null ? (rand.NextDouble() < 0.6 ? (rand.NextDouble() < 0.2 ? 2 : 1) : 0) : 0;
-            bool useParticleThe = rand.NextDouble() < 0.3;
+            bool isContinuous = rand.NextDouble() < continuousProp;
+            int numberOfAdj = psub == null ? (rand.NextDouble() < adjProp ? (rand.NextDouble() < secAdjProp ? 2 : 1) : 0) : 0;
+            bool useParticleThe = rand.NextDouble() < theProp;
 
             List<string> genWords = new List<string>();
 
@@ -66,15 +74,13 @@ namespace AnalyzerObfuscator
 
             if (psub != null)
             {
-                genWords.AddRange(new List<string>() 
-                {
-                    "then"
-                });
+                List<string> thenLikes = new List<string>() { "then", "after that", "later", "suddenly" };
+                genWords.Add(thenLikes[rand.Next(thenLikes.Count)]);
             }
 
             if (psub == null )
             {
-                if (rand.NextDouble() < 0.3)
+                if (rand.NextDouble() < someProp)
                 {
                     genWords.Add("some");
                 }
@@ -89,7 +95,8 @@ namespace AnalyzerObfuscator
             }
             else
             {
-                genWords.Add("that");
+                List<string> theLikes = new List<string>() { "that", "the same", "same" };
+                genWords.Add(theLikes[rand.Next(theLikes.Count)]);
             }
             
             genWords.AddRange(adjList);
@@ -106,13 +113,8 @@ namespace AnalyzerObfuscator
 
             genWords[0] = capitalize(genWords[0]);
 
-            string nextSentence = rand.NextDouble() < 0.8 ? " " + generateSentence(rand, nsub) : "";
-            return string.Join(" ", genWords) + "." + nextSentence;
-            //if (isContinuous)
-            //    return String.Format("{0} {1} {2} was {3}.", capitalize(particle), adjList, subject, verb.Continuous);
-            //else
-            //    return String.Format("{0} {1}{2} {3}.", capitalize(particle), adjList, subject, verb.Past);
-            
+            string nextSentence = GetRandomTruth(nextSentenceProp) ? " " + generateSentence(nsub) : "";
+            return string.Join(" ", genWords) + "." + nextSentence;            
         }
 
         public static string generateText(int length)
@@ -122,14 +124,12 @@ namespace AnalyzerObfuscator
                 return String.Empty;
             }
 
-            var rand = new Random();
-
-            string res = generateSentence(rand);
+            string res = generateSentence();
             int sentencesCount = res.Split(".").Length - 1;
 
             for (int i = 0; sentencesCount < length; i++)
             {
-                string nextSentences = generateSentence(rand);
+                string nextSentences = generateSentence();
                 res += " " + nextSentences;
                 sentencesCount += nextSentences.Split(".").Length - 1;
             }
