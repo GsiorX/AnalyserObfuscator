@@ -29,6 +29,8 @@ namespace AnalyzerObfuscator
             { "dog", new Noun("a", "dog", new List<string>(){ "animal" }) },
             { "cat", new Noun("a", "cat", new List<string>(){ "animal" }) },
             { "fish", new Noun("a", "fish", new List<string>(){ "animal" }) },
+            { "mouse", new Noun("a", "mouse", new List<string>(){ "animal" }) },
+            { "lion", new Noun("a", "lion", new List<string>(){ "animal" }) },
             { "person", new Noun("a", "person", new List<string>(){ "person" }) },
             { "man", new Noun("a", "man", new List<string>(){ "person" }) },
             { "woman", new Noun("a", "woman", new List<string>(){ "person" }) },
@@ -70,7 +72,7 @@ namespace AnalyzerObfuscator
         public static readonly List<Verb> verbs = new List<Verb>() {
             new Verb("eat", new List<string>() { "food" }).SetPassive(),
             new Verb("walk", new List<string>() { "place" }),
-            new Verb("run", new List<string>() { "place" }).SetContinuous("running"),
+            new Verb("run", new List<string>() { "place" }).SetContinuous("running").SetPast("runned"),
             new Verb("talk", new List<string>() { "person" }),
         };
 
@@ -90,6 +92,8 @@ namespace AnalyzerObfuscator
             { "dog", ("an", "animal") },
             { "cat", ("an", "animal") },
             { "fish", ("an", "animal") },
+            { "mouse", ("an", "animal") },
+            { "lion", ("an", "animal") },
             { "man", ("a", "person") },
             { "woman", ("a", "person") },
             { "boy", ("a", "person") },

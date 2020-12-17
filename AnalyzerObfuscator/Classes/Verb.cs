@@ -10,6 +10,7 @@ namespace AnalyzerObfuscator
         public List<string> Tags { get; }
 
         public string Continuous { get; private set; }
+        public string Past { get; private set; }
         public bool IsPassive { get; private set; }
 
         public Verb(string text, List<string> tags)
@@ -17,12 +18,19 @@ namespace AnalyzerObfuscator
             Text = text;
             Tags = tags;
             Continuous = text + "ing";
+            Past = text + "ed";
             IsPassive = false;
         }
 
         public Verb SetContinuous(string continuous)
         {
             Continuous = continuous;
+            return this;
+        }
+
+        public Verb SetPast(string past)
+        {
+            Past = past;
             return this;
         }
 
