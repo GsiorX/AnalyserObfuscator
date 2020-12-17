@@ -5,12 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyzerObfuscator"
         mc:Ignorable="d"
-        Title="ObfuscationResultWindow" Height="450" Width="800">
+        Title="ObfuscationResultWindow" Height="600" Width="800">
     <Grid>
-        <FlowDocumentReader x:Name="reader" Margin="10,35,10,10">
-        </FlowDocumentReader>
-        <!--<TextBlock x:Name="textBlock" TextWrapping="Wrap" Margin="10,35,10,10"/>-->
-        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="save_Click"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1"><Bold>Before obfuscation</Bold></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1"><Bold>After obfuscation</Bold></TextBlock>
+        <FlowDocumentReader x:Name="before" Margin="10,35,10,10" Grid.Row="2"/>
+        <FlowDocumentReader x:Name="reader" Margin="10,35,10,10" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Click="save_Click"/>
     </Grid>
 </Window>

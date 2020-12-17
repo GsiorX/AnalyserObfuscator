@@ -66,6 +66,7 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
 </Paragraph>
 </FlowDocument>";
             FlowDocument content = XamlReader.Parse(obfDoc) as FlowDocument;
+            before.Document = document;
             reader.Document = content;
         }
 
