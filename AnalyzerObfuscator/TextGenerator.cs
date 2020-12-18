@@ -25,7 +25,8 @@ namespace AnalyzerObfuscator
             const double continuousProp = 0.3;
             const double theProp = 0.3;
             const double someProp = 0.4;
-            const double nextSentenceProp = 0.6;
+            const double secondSentenceProp = 1.0;
+            const double nextSentenceProp = 0.4;
 
 
             int nounId = rand.Next(0, Vocabulary.subjects.Count);
@@ -37,21 +38,6 @@ namespace AnalyzerObfuscator
             var subjectParticle = (psub == null) ? subParticlePair.Value.Particle : psub.Particle;
             var verb = Vocabulary.verbs[verbId];
 
-            if (verb.Tags.Count > 0)
-            {
-                string tag = verb.Tags[rand.Next(0, verb.Tags.Count)];
-                var n = Noun.GetByTag(Vocabulary.nouns, tag);
-                if (n.Count > 0)
-                {
-                    int advId = rand.Next(0, Vocabulary.adjectives.Count);
-                    var advParticlePair = Enumerable.ToList(Vocabulary.adjectives)[advId];
-                    var adv = advParticlePair.Key;
-                    var advParticle = advParticlePair.Value;
-
-                    var cn = n[(rand.Next(0, n.Count))];
-                    return String.Format("{0} {1} {2} was {3} {4} {5}.", capitalize(advParticle), adv, subject, verb.Continuous, cn.Particle, cn.Text);
-                }
-            }
 
             bool isContinuous = rand.NextDouble() < continuousProp;
             int numberOfAdj = psub == null ? (rand.NextDouble() < adjProp ? (rand.NextDouble() < secAdjProp ? 2 : 1) : 0) : 0;
@@ -111,9 +97,22 @@ namespace AnalyzerObfuscator
                 genWords.Add(verb.Past);
             }
 
+            // If can be passive
+            if (verb.Tags.Count > 0)
+            {
+                string tag = verb.Tags[rand.Next(0, verb.Tags.Count)];
+                var n = Noun.GetByTag(Vocabulary.nouns, tag);
+                if (n.Count > 0)
+                {
+                    var cn = n[(rand.Next(0, n.Count))];
+                    genWords.Add(cn.Particle);
+                    genWords.Add(cn.Text);
+                }
+            }
+
             genWords[0] = capitalize(genWords[0]);
 
-            string nextSentence = GetRandomTruth(nextSentenceProp) ? " " + generateSentence(nsub) : "";
+            string nextSentence = GetRandomTruth(psub == null ? secondSentenceProp : nextSentenceProp) ? " " + generateSentence(nsub) : "";
             return string.Join(" ", genWords) + "." + nextSentence;            
         }
 
