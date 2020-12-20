@@ -18,12 +18,7 @@ namespace AnalyzerObfuscator
             Text = text;
             Tags = tags;
             PluralEnd = pluralEnd;
-            if (pluralEnd == "s" || pluralEnd == "es")
-            {
-                Plural = Text + PluralEnd;
-            }
-            else { 
-                Plural = pluralEnd};
+            Plural = changeToPlural(text, pluralEnd);
         }
 
         public static List<Noun> GetByTag(Dictionary<string, Noun> nouns, string tag)
@@ -39,7 +34,22 @@ namespace AnalyzerObfuscator
             return taggedNouns;
         }
 
+        private string changeToPlural(string text, string pluralEnd)
+        {
+            if(pluralEnd == "")
+            {
+                return text;
+            }
+            else if (pluralEnd == "s" || pluralEnd == "es")
+            {
+                return Text + PluralEnd;
+            }
+            else
+            {
+                return pluralEnd;
 
+            }
+        }
 
         public static Noun ParseNoun(string word)
         {
