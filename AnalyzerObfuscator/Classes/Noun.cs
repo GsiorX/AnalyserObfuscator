@@ -9,12 +9,21 @@ namespace AnalyzerObfuscator
         public string Text { get; }
         public string Particle { get; }
         public List<string> Tags { get; }
+        public string Plural { get; private set; }
+        public string PluralEnd { get; private set; }
 
-        public Noun(string particle, string text, List<string> tags)
+        public Noun(string particle, string text, List<string> tags, string pluralEnd)
         {
             Particle = particle;
             Text = text;
             Tags = tags;
+            PluralEnd = pluralEnd;
+            if (pluralEnd == "s" || pluralEnd == "es")
+            {
+                Plural = Text + PluralEnd;
+            }
+            else { 
+                Plural = pluralEnd};
         }
 
         public static List<Noun> GetByTag(Dictionary<string, Noun> nouns, string tag)
@@ -29,6 +38,8 @@ namespace AnalyzerObfuscator
             }
             return taggedNouns;
         }
+
+
 
         public static Noun ParseNoun(string word)
         {

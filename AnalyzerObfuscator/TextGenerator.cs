@@ -144,7 +144,7 @@ namespace AnalyzerObfuscator
 
             if (rand.NextDouble() < fairytaleBeginningProb)
             {
-                 res = generateFirstSentence();
+                res = generateFirstSentence();
             }
             else
             {

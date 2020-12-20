@@ -15,9 +15,9 @@ namespace AnalyzerObfuscator
 
             foreach (KeyValuePair<string, int> entry in documentNodeCount)
             {
-                if(!differences.Any(d => d.Name == entry.Key))
+                if (!differences.Any(d => d.Name == entry.Key))
                 {
-                    differences.Add(new Difference{ Name = entry.Key, DocumentValue = entry.Value, ObfuscatedDocumentValue = 0});
+                    differences.Add(new Difference { Name = entry.Key, DocumentValue = entry.Value, ObfuscatedDocumentValue = 0 });
                 }
                 else
                 {

@@ -25,35 +25,35 @@ namespace AnalyzerObfuscator
         }
 
         public static readonly Dictionary<string, Noun> subjects = new Dictionary<string, Noun>() {
-            { "animal", new Noun("an", "animal", new List<string>(){ "animal" }) },
-            { "dog", new Noun("a", "dog", new List<string>(){ "animal" }) },
-            { "cat", new Noun("a", "cat", new List<string>(){ "animal" }) },
-            { "fish", new Noun("a", "fish", new List<string>(){ "animal" }) },
-            { "mouse", new Noun("a", "mouse", new List<string>(){ "animal" }) },
-            { "lion", new Noun("a", "lion", new List<string>(){ "animal" }) },
-            { "person", new Noun("a", "person", new List<string>(){ "person" }) },
-            { "man", new Noun("a", "man", new List<string>(){ "person" }) },
-            { "woman", new Noun("a", "woman", new List<string>(){ "person" }) },
-            { "boy", new Noun("a", "boy", new List<string>(){ "person" }) },
-            { "girl", new Noun("a", "girl", new List<string>(){ "person" }) },
-            { "child", new Noun("a", "child", new List<string>(){ "person" }) },
-            { "father", new Noun("a", "father", new List<string>(){ "person" }) },
-            { "mother", new Noun("a", "mother", new List<string>(){ "person" }) },
-            { "hat", new Noun("a", "hat", new List<string>(){ "object" }) },
-            { "book", new Noun("a", "book", new List<string>(){ "object" }) },
-            { "student", new Noun("a", "student", new List<string>(){ "person" }) },
-            { "surgeon", new Noun("a", "surgeon", new List<string>(){ "person" }) },
-            { "monster", new Noun("a", "monster", new List<string>(){ "person" }) },
-            { "rat", new Noun("a", "rat", new List<string>(){ "animal" }) },
-            { "wolf", new Noun("a", "wolf", new List<string>(){ "animal" }) },
-            { "country", new Noun("a", "country", new List<string>(){ "place" }) },
-            { "village", new Noun("a", "village", new List<string>(){ "place" }) },
-            { "city", new Noun("a", "city", new List<string>(){ "city" }) }
+            { "animal", new Noun("an", "animal", new List<string>(){ "animal"}, "s") },
+            { "dog", new Noun("a", "dog", new List<string>(){ "animal" },"s")},
+            { "cat", new Noun("a", "cat", new List<string>(){ "animal" }, "s" )},
+            { "fish", new Noun("a", "fish", new List<string>(){ "animal" }, "es" )},
+            { "mouse", new Noun("a", "mouse", new List<string>(){ "animal"}, "s" ) },
+            { "lion", new Noun("a", "lion", new List<string>(){ "animal" }, "s") },
+            { "person", new Noun("a", "person", new List<string>(){ "person" }, "s") },
+            { "man", new Noun("a", "man", new List<string>(){ "person" } , "s")},
+            { "woman", new Noun("a", "woman", new List<string>(){ "person" }, "s") },
+            { "boy", new Noun("a", "boy", new List<string>(){ "person" }, "s") },
+            { "girl", new Noun("a", "girl", new List<string>(){ "person" }, "s") },
+            { "child", new Noun("a", "child", new List<string>(){ "person" }, "s") },
+            { "father", new Noun("a", "father", new List<string>(){ "person" }, "s") },
+            { "mother", new Noun("a", "mother", new List<string>(){ "person" }, "s") },
+            { "hat", new Noun("a", "hat", new List<string>(){ "object" }, "s") },
+            { "book", new Noun("a", "book", new List<string>(){ "object" }, "s") },
+            { "student", new Noun("a", "student", new List<string>(){ "person" }, "s") },
+            { "surgeon", new Noun("a", "surgeon", new List<string>(){ "person" }, "s") },
+            { "monster", new Noun("a", "monster", new List<string>(){ "person" }, "s") },
+            { "rat", new Noun("a", "rat", new List<string>(){ "animal" }, "s") },
+            { "wolf", new Noun("a", "wolf", new List<string>(){ "animal" }, "s") },
+            { "country", new Noun("a", "country", new List<string>(){ "place" }, "es") },
+            { "village", new Noun("a", "village", new List<string>(){ "place" }, "es") },
+            { "city", new Noun("a", "city", new List<string>(){ "city" }, "s") }
         };
 
         public static readonly Dictionary<string, Noun> nouns = new Dictionary<string, Noun>() {
-            { "apple", new Noun("an", "apple", new List<string>(){ "food" }) },
-            { "steak", new Noun("a", "steak", new List<string>(){ "food" }) },
+            { "apple", new Noun("an", "apple", new List<string>(){ "food" }, "s") },
+            { "steak", new Noun("a", "steak", new List<string>(){ "food" }, "s") },
         };
 
 
