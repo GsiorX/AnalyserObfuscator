@@ -36,14 +36,19 @@ namespace AnalyzerObfuscator
             { "woman", new Noun("a", "woman", new List<string>(){ "person" }) },
             { "boy", new Noun("a", "boy", new List<string>(){ "person" }) },
             { "girl", new Noun("a", "girl", new List<string>(){ "person" }) },
-
             { "child", new Noun("a", "child", new List<string>(){ "person" }) },
             { "father", new Noun("a", "father", new List<string>(){ "person" }) },
             { "mother", new Noun("a", "mother", new List<string>(){ "person" }) },
             { "hat", new Noun("a", "hat", new List<string>(){ "object" }) },
             { "book", new Noun("a", "book", new List<string>(){ "object" }) },
             { "student", new Noun("a", "student", new List<string>(){ "person" }) },
-            { "surgeon", new Noun("a", "surgeon", new List<string>(){ "person" }) }
+            { "surgeon", new Noun("a", "surgeon", new List<string>(){ "person" }) },
+            { "monster", new Noun("a", "monster", new List<string>(){ "person" }) },
+            { "rat", new Noun("a", "rat", new List<string>(){ "animal" }) },
+            { "wolf", new Noun("a", "wolf", new List<string>(){ "animal" }) },
+            { "country", new Noun("a", "country", new List<string>(){ "place" }) },
+            { "village", new Noun("a", "village", new List<string>(){ "place" }) },
+            { "city", new Noun("a", "city", new List<string>(){ "city" }) }
         };
 
         public static readonly Dictionary<string, Noun> nouns = new Dictionary<string, Noun>() {
@@ -67,6 +72,7 @@ namespace AnalyzerObfuscator
             { "red", "a" },
             { "precise", "a" },
             { "caring", "a" },
+            { "evil", "an" },
         };
 
         public static readonly List<Verb> verbs = new List<Verb>() {
@@ -86,8 +92,6 @@ namespace AnalyzerObfuscator
             "eat",
         };
 
-
-
         public static readonly IDictionary<string, (string, string)> generalizations = new Dictionary<string, (string, string)>() {
             { "dog", ("an", "animal") },
             { "cat", ("an", "animal") },
@@ -105,8 +109,11 @@ namespace AnalyzerObfuscator
             { "child", ("a", "person") },
             { "student", ("a", "person") },
             { "book", ("an", "object") },
-            { "business", ("an", "object") },
-            { "country", ("an", "object") },
+            { "business", ("a", "place") },
+            { "country", ("a", "place") },
+            { "monster", ("an", "creature") },
+            { "village", ("a", "place") },
+            { "city", ("a", "place") }
         };
 
         public static readonly Dictionary<string, (string, string)> synonyms = new Dictionary<string, (string, string)>() {
@@ -122,7 +129,10 @@ namespace AnalyzerObfuscator
             { "child", ("a", "kid") },
             { "student", ("a", "graduate") },
             { "book", ("a", "notebook") },
-            { "business", ("a", "company") },
+            { "business", ("a", "biz") },
+            { "work", ("a", "job") },
+            { "task", ("an", "assignement") }
         };
+
     }
 }
