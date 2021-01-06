@@ -16,13 +16,16 @@
 
         <TabControl Grid.ColumnSpan="4">
             <TabItem Header="Analyze">
-                <local:AnalysisTab></local:AnalysisTab>
+                <local:AnalysisTab/>
             </TabItem>
             <TabItem Header="Obfuscate">
-                <local:ObfuscateTab></local:ObfuscateTab>
+                <local:ObfuscateTab/>
+            </TabItem>
+            <TabItem Header="Deobfuscate">
+                <local1:DeobfuscateTab/>
             </TabItem>
             <TabItem Header="Generate">
-                <local1:GenerateTab></local1:GenerateTab>
+                <local1:GenerateTab/>
             </TabItem>
         </TabControl>
     </Grid>

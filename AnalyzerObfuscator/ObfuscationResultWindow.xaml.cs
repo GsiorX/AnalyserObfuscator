@@ -86,7 +86,7 @@ ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" Page
 
                     MessageBox.Show("File saved", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                catch (Exception _)
+                catch
                 {
                     MessageBox.Show("Failed to save a file", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
