@@ -6,11 +6,15 @@ namespace AnalyzerObfuscator
 {
     class SynonymObfuscator : IObfuscator
     {
+        private static readonly Random rand = new Random();
+        private static readonly double synProp = 0.6;
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
             for (int i = 0; i < sentences.Length; i++)
             {
+                if (rand.NextDouble() >= synProp) continue;
+
                 List<string> splitSentence = new List<string>(sentences[i].Split(" "));
                 foreach (KeyValuePair<string, (string, string)> subject in Vocabulary.synonyms)
                 {

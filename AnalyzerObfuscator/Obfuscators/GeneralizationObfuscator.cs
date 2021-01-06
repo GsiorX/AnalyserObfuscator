@@ -9,6 +9,8 @@ namespace AnalyzerObfuscator
 {
     class GeneralizationObfuscator : IObfuscator
     {
+        private static readonly Random rand = new Random();
+        private static readonly double genProp = 0.6;
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
@@ -16,6 +18,12 @@ namespace AnalyzerObfuscator
             
             for (int i = 0; i < sentences.Length; i++)
             {
+                if (rand.NextDouble() >= genProp)
+                {
+                    outputSentences.Add(sentences[i]);
+                    continue;
+                }
+
                 string givenSubject = null;
                 string sentence = Vocabulary.lower(sentences[i]);
                 List<string> splitSentence = new List<string>(sentence.Split(" "));
