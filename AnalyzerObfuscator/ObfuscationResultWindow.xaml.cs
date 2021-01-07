@@ -40,21 +40,9 @@ namespace AnalyzerObfuscator
             if (obfsNames.Contains("pas")) obfs.Add(new PassiveObfuscator());
             if (obfsNames.Contains("and")) obfs.Add(new AndObfuscator());
 
-            //GeneralizationObfuscator genObfs = new GeneralizationObfuscator();
-            //SynonymObfuscator synObfs = new SynonymObfuscator();
-            //PassiveObfuscator pasObfs = new PassiveObfuscator();
-            //string genObfsRes = genObfs.ObfuscateText(text);
-            //string pasObfsRes = pasObfs.ObfuscateText(genObfsRes);
-            //string synObfsRes = synObfs.ObfuscateText(pasObfsRes);
-            //List<IObfuscator> obfs = new List<IObfuscator>()
-            //{
-            //    //new GeneralizationObfuscator(),
-            //    //new SynonymObfuscator(),
-            //    //new PassiveObfuscator(),
-            //    //new AddObfuscator(),
-            //};
 
-            string result = IObfuscator.JoinObf(obfs, text).Replace(".", ". ") + ".";
+            string[] results = IObfuscator.JoinObf(obfs, text.Replace(". ", ".")).Split(".").Select(s => s.Trim()).Where(s => s != "").Select(s => Vocabulary.capitalize(s)).ToArray();
+            string result = string.Join(". ", results) + ".";
 
             obfDoc = @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""

@@ -6,12 +6,33 @@ namespace AnalyzerObfuscator
 {
     class AndObfuscator : IObfuscator
     {
+        private static readonly Random rand = new Random();
+        private static readonly double andProp = 0.6;
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
             List<string> outputSentences = new List<string>();
 
             // outputSentences.Add(sentences[0]);
+
+            string res = "";
+            bool first = true;
+            for (int i = 0; i < sentences.Length - 2; i++)
+            {
+                res += first ? Vocabulary.lower(sentences[i]) : Vocabulary.lower(sentences[i]);
+
+                if (rand.NextDouble() < andProp)
+                {
+                    res += first ? " and " : ", and ";
+                    first = false;
+                }
+                else
+                {
+                    res += ". ";
+                    first = true;
+                }
+            }
+            return res + sentences[sentences.Length - 1] + ".";
 
             for (int i = 1; i < sentences.Length - 1; i++)
             {
