@@ -49,7 +49,7 @@ namespace AnalyzerObfuscator
                         Vocabulary.subjects.TryGetValue(subject.Key, out Noun noun);
                         if (noun == null) break;
 
-                        tmpSentences.Add("The " + subject.Value.Item2 + " is " + noun.Particle + " " + subject.Key);
+                        tmpSentences.Add("The " + subject.Value.Item2 + " was " + noun.Particle + " " + subject.Key);
                         break;
                     }
                 }
@@ -77,7 +77,7 @@ namespace AnalyzerObfuscator
                                 splitSentence[index - 1] = noun.Particle;
                             }
                             splitSentence.Remove(adjective.Key);
-                            tmpSentences.Add("The " + givenSubject + " is " + adjective.Key);
+                            tmpSentences.Add("The " + givenSubject + " was " + adjective.Key);
                         }
                     }
                     sentence = String.Join(" ", splitSentence);
