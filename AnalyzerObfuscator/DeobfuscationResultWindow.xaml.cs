@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Markup;
 
 namespace AnalyzerObfuscator
 {
@@ -33,9 +34,26 @@ namespace AnalyzerObfuscator
 
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
             //Tutaj jakaś deobfuskacja
-            //zmienna deobfDoc sluzy pozniej do zapisu
+            MostCommonWords mostCommonWords = new MostCommonWords();
+            var res = mostCommonWords.Find(text, 3).GetValueOrDefault("and", 0);
+            // Jeśli and jest pośród 3 najczęstrzych wyrazów to zamień , and na kropki
+            if (res > 0)
+            {
+                text = string.Join(". ", text.Split(", and ").Select(words => Vocabulary.capitalize(words)));
+            }
 
-            //reader.Document = deobfDocument;
+            // Zapisz deobfuskowany tekst
+            deobfDoc = @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""
+ColumnWidth=""400"" FontSize=""14"" FontFamily=""Georgia"" ColumnGap=""20"" PagePadding=""20"">
+
+<Paragraph>
+" + text +
+@"
+</Paragraph>
+</FlowDocument>";
+            FlowDocument content = XamlReader.Parse(deobfDoc) as FlowDocument;
+            reader.Document = content;
         }
         private void save_Click(object sender, RoutedEventArgs e)
         {

@@ -14,9 +14,10 @@ namespace AnalyzerObfuscator
 
         public static string lower(string word)
         {
-            if (word.Length < 1) return word;
+            string trimmed = word.Trim();
+            if (trimmed.Length < 1) return word;
 
-            return char.ToLower(word[0]) + word.Substring(1);
+            return char.ToLower(trimmed[0]) + trimmed.Substring(1);
         }
 
         public static bool IsParticle(string word)
