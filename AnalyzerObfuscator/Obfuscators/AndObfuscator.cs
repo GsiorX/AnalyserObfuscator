@@ -7,7 +7,7 @@ namespace AnalyzerObfuscator
     class AndObfuscator : IObfuscator
     {
         private static readonly Random rand = new Random();
-        private static readonly double andProp = 0.6;
+        private static readonly double andProp = 0.8;
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
@@ -17,9 +17,9 @@ namespace AnalyzerObfuscator
 
             string res = "";
             bool first = true;
-            for (int i = 0; i < sentences.Length - 2; i++)
+            for (int i = 0; i < sentences.Length - 1; i++)
             {
-                res += first ? Vocabulary.lower(sentences[i]) : Vocabulary.lower(sentences[i]);
+                res += Vocabulary.lower(sentences[i]);
 
                 if (rand.NextDouble() < andProp)
                 {
@@ -32,7 +32,7 @@ namespace AnalyzerObfuscator
                     first = true;
                 }
             }
-            return res + sentences[sentences.Length - 1] + ".";
+            return res + Vocabulary.lower(sentences[sentences.Length - 1]) + ".";
 
             for (int i = 1; i < sentences.Length - 1; i++)
             {
