@@ -34,11 +34,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">And obfuscator</TextBlock>
-            <CheckBox Name="addObf" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsChecked="True"></CheckBox>
-            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Generalization</TextBlock>
-            <CheckBox Name="generalizationObf" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" IsChecked="True"></CheckBox>
+            <CheckBox Name="addObf" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsChecked="True" Checked="addObf_Checked" Unchecked="addObf_Checked"></CheckBox>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Probability</TextBlock>
+            <TextBox Name="andProb" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100">0,8</TextBox>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Generalization</TextBlock>
+            <CheckBox Name="generalizationObf" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" IsChecked="True" Checked="generalizationObf_Checked" Unchecked="generalizationObf_Checked"></CheckBox>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">Probability</TextBlock>
+            <TextBox Name="genProb" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100">0,6</TextBox>
         </Grid>
         <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
@@ -48,11 +54,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Passive voice</TextBlock>
             <CheckBox Name="passiveObf" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsChecked="True"></CheckBox>
-            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Synonyms</TextBlock>
-            <CheckBox Name="synonymObf" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" IsChecked="True"></CheckBox>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">Synonyms</TextBlock>
+            <CheckBox Name="synonymObf" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" IsChecked="True" Checked="synonymObf_Checked" Unchecked="synonymObf_Checked"></CheckBox>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">Probability</TextBlock>
+            <TextBox Name="synProb" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100">0,6</TextBox>
         </Grid>
         <Button Grid.Row="4" Grid.Column="2" x:Name="next" Content="Next" Margin="10,19,10,18" Click="next_Click"/>
     </Grid>

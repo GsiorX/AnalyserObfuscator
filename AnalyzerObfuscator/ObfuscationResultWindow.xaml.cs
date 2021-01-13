@@ -23,23 +23,21 @@ namespace AnalyzerObfuscator
     public partial class ObfuscationResultWindow : Window
     {
         private string obfDoc = "";
-        public ObfuscationResultWindow(FlowDocument document, List<string> obfs)
+        public ObfuscationResultWindow(FlowDocument document, Dictionary<string, double> obfs)
         {
             InitializeComponent();
             Analyze(document, obfs);
         }
 
-        void Analyze(FlowDocument document, List<string> obfsNames)
+        void Analyze(FlowDocument document, Dictionary<string, double> obfsNames)
         {
-
             string text = new TextRange(document.ContentStart, document.ContentEnd).Text;
             text = text.Trim().Substring(0, text.Trim().Length - 1);
             List<IObfuscator> obfs = new List<IObfuscator>();
-            if (obfsNames.Contains("gen")) obfs.Add(new GeneralizationObfuscator());
-            if (obfsNames.Contains("syn")) obfs.Add(new SynonymObfuscator());
-            if (obfsNames.Contains("pas")) obfs.Add(new PassiveObfuscator());
-            if (obfsNames.Contains("and")) obfs.Add(new AndObfuscator());
-
+            if (obfsNames.ContainsKey("gen")) obfs.Add(new GeneralizationObfuscator(obfsNames.GetValueOrDefault("gen")));
+            if (obfsNames.ContainsKey("syn")) obfs.Add(new SynonymObfuscator(obfsNames.GetValueOrDefault("syn")));
+            if (obfsNames.ContainsKey("pas")) obfs.Add(new PassiveObfuscator());
+            if (obfsNames.ContainsKey("and")) obfs.Add(new AndObfuscator(obfsNames.GetValueOrDefault("and")));
 
             string[] results = IObfuscator.JoinObf(obfs, text.Replace(". ", ".")).Split(".").Select(s => s.Trim()).Where(s => s != "").Select(s => Vocabulary.capitalize(s)).ToArray();
             string result = string.Join(". ", results) + ".";

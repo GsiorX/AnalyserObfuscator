@@ -7,6 +7,18 @@ namespace AnalyzerObfuscator
     public class TextGenerator
     {
         private static readonly Random rand = new Random();
+        double adjProb, secAdjProb, continuousProb, theProb, someProb, nextSentenceProb;
+
+        public TextGenerator(Dictionary<string, double> options)
+        {
+            adjProb = options.GetValueOrDefault("adjProb");
+            secAdjProb = options.GetValueOrDefault("secAdjProb");
+            continuousProb = options.GetValueOrDefault("continuousProb");
+            theProb = options.GetValueOrDefault("theProb");
+            someProb = options.GetValueOrDefault("someProb");
+            nextSentenceProb = options.GetValueOrDefault("nextSentenceProb");
+        }
+
         private static bool GetRandomTruth(double probability)
         {
             return rand.Next(1000) < probability * 1000;
@@ -18,16 +30,8 @@ namespace AnalyzerObfuscator
 
             return char.ToUpper(word[0]) + word.Substring(1);
         }
-        static string generateSentence(Noun previousSubject = null)
+        string generateSentence(Noun previousSubject = null)
         {
-            const double adjProb = 0.6;
-            const double secAdjProb = 0.4;
-            const double continuousProb = 0.3;
-            const double theProb = 0.3;
-            const double someProb = 0.4;
-            const double nextSentenceProb = 0.6;
-
-
             int nounId = rand.Next(0, Vocabulary.subjects.Count);
             int verbId = rand.Next(0, Vocabulary.verbs.Count);
 
@@ -132,7 +136,7 @@ namespace AnalyzerObfuscator
             return introductions[biginningId] + ".";
         }
 
-        public static string generateText(int length)
+        public string generateText(int length)
         {
             if (length < 1)
             {
@@ -144,7 +148,7 @@ namespace AnalyzerObfuscator
 
             if (rand.NextDouble() < fairytaleBeginningProb)
             {
-                 res = generateFirstSentence();
+                res = generateFirstSentence();
             }
             else
             {
@@ -162,7 +166,7 @@ namespace AnalyzerObfuscator
             return res;
         }
 
-        public static string generateFlowText(int length)
+        public string generateFlowText(int length)
         {
             return @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""

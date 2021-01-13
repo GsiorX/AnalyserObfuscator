@@ -7,7 +7,13 @@ namespace AnalyzerObfuscator
     class AndObfuscator : IObfuscator
     {
         private static readonly Random rand = new Random();
-        private static readonly double andProp = 0.8;
+        private double _probability;
+
+        public AndObfuscator(double probability = 0.8)
+        {
+            _probability = probability;
+        }
+
         public string ObfuscateText(string text)
         {
             string[] sentences = text.Split(".");
@@ -21,7 +27,7 @@ namespace AnalyzerObfuscator
             {
                 res += Vocabulary.lower(sentences[i]);
 
-                if (rand.NextDouble() < andProp)
+                if (rand.NextDouble() < _probability)
                 {
                     res += first ? " and " : ", and ";
                     first = false;
