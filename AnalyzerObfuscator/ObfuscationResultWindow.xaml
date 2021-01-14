@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyzerObfuscator"
         mc:Ignorable="d"
-        Title="ObfuscationResultWindow" Height="600" Width="800">
+        Title="Analyzer Obfuscator - Obfuscation Result Window" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

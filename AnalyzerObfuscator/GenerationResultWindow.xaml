@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalyzerObfuscator"
         mc:Ignorable="d"
-        Title="GenerationResultWindow" Height="450" Width="800">
+        Title="Analyzer Obfuscator - Generation Result Window" Height="450" Width="800">
     <Grid>
         <FlowDocumentReader x:Name="reader" Margin="10,35,10,10"/>
         <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="save_Click"/>
