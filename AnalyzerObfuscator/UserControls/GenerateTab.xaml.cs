@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,12 +20,12 @@ namespace AnalyzerObfuscator.UserControls
             if (Validate())
             {
                 Dictionary<string, double> options = new Dictionary<string, double>();
-                options.Add("adjProb", double.Parse(adjProb.Text));
-                options.Add("secAdjProb", double.Parse(secAdjProb.Text));
-                options.Add("continuousProb", double.Parse(continuousProb.Text));
-                options.Add("theProb", double.Parse(theProb.Text));
-                options.Add("someProb", double.Parse(someProb.Text));
-                options.Add("nextSentenceProb", double.Parse(nextSentenceProb.Text));
+                options.Add("adjProb", Helpers.ParseDouble(adjProb.Text));
+                options.Add("secAdjProb", Helpers.ParseDouble(secAdjProb.Text));
+                options.Add("continuousProb", Helpers.ParseDouble(continuousProb.Text));
+                options.Add("theProb", Helpers.ParseDouble(theProb.Text));
+                options.Add("someProb", Helpers.ParseDouble(someProb.Text));
+                options.Add("nextSentenceProb", Helpers.ParseDouble(nextSentenceProb.Text));
 
                 TextGenerator textGenerator = new TextGenerator(options);
 
@@ -51,7 +52,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(adjProb.Text, out AdjProbability))
+            if (!Helpers.CheckDouble(adjProb.Text, out AdjProbability))
             {
                 MessageBox.Show("Adjective probability must be a number");
                 return false;
@@ -63,7 +64,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(secAdjProb.Text, out secAdjProbability))
+            if (!Helpers.CheckDouble(secAdjProb.Text, out secAdjProbability))
             {
                 MessageBox.Show("Second adjective probability must be a number");
                 return false;
@@ -75,7 +76,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(continuousProb.Text, out continuousProbability))
+            if (!Helpers.CheckDouble(continuousProb.Text, out continuousProbability))
             {
                 MessageBox.Show("Continuous probability must be a number");
                 return false;
@@ -87,7 +88,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(theProb.Text, out theProbability))
+            if (!Helpers.CheckDouble(theProb.Text, out theProbability))
             {
                 MessageBox.Show("\"The\" word probability must be a number");
                 return false;
@@ -99,7 +100,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(someProb.Text, out someProbability))
+            if (!Helpers.CheckDouble(someProb.Text, out someProbability))
             {
                 MessageBox.Show("\"Some\" word probability must be a number");
                 return false;
@@ -111,7 +112,7 @@ namespace AnalyzerObfuscator.UserControls
                 return false;
             }
 
-            if (!double.TryParse(nextSentenceProb.Text, out nextSentenceProbability))
+            if (!Helpers.CheckDouble(nextSentenceProb.Text, out nextSentenceProbability))
             {
                 MessageBox.Show("Next sentence probability must be a number");
                 return false;
