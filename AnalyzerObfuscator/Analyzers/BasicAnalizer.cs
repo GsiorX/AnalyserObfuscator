@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace AnalyzerObfuscator
@@ -58,13 +59,18 @@ namespace AnalyzerObfuscator
             wordPerSentResult /= sentenceCount;
             lettersPerWordResult /= wordCount;
 
+            
+            List<string> splitSentence = new List<string>(text.Replace('.', ' ').Split(" "));
+            int generalNounCount = splitSentence.Where(e => Vocabulary.generalNouns.Contains(e)).Count();
+
             return new Dictionary<string, double>()
             {
                 { "lettersCount", lettersCount },
                 { "wordCount", wordCount },
                 { "sentenceCount", sentenceCount },
                 { "wordPerSentResult", Math.Round(wordPerSentResult, 2) },
-                { "lettersPerWordResult", Math.Round(lettersPerWordResult, 2) }
+                { "lettersPerWordResult", Math.Round(lettersPerWordResult, 2) },
+                { "generalNounCount", generalNounCount }
             };
         }
 
@@ -77,9 +83,11 @@ namespace AnalyzerObfuscator
             {
                 (new Difference{ Name="Number of letters", DocumentValue=ares["lettersCount"], ObfuscatedDocumentValue=bres["lettersCount"] }),
                 (new Difference{ Name="Number of words", DocumentValue=ares["wordCount"], ObfuscatedDocumentValue=bres["wordCount"] }),
+                (new Difference{ Name="Number of general nouns", DocumentValue=ares["generalNounCount"], ObfuscatedDocumentValue=bres["generalNounCount"] }),
                 (new Difference{ Name="Number of sentences", DocumentValue=ares["sentenceCount"], ObfuscatedDocumentValue=bres["sentenceCount"] }),
                 (new Difference{ Name="Number of words in a sentence", DocumentValue=ares["wordPerSentResult"], ObfuscatedDocumentValue=bres["wordPerSentResult"] }),
                 (new Difference{ Name="Number of letters in a word", DocumentValue=ares["lettersPerWordResult"], ObfuscatedDocumentValue=bres["lettersPerWordResult"] }),
+                
             };
 
             return differences;
