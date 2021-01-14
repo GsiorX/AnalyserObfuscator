@@ -42,6 +42,66 @@ namespace AnalyzerObfuscator
                 text = string.Join(". ", text.Split(", and ").Select(words => Vocabulary.capitalize(words)));
             }
 
+            BasicAnalizer basicAnalizer = new BasicAnalizer();
+            var baRes = basicAnalizer.AnalyzeSingleText(text);
+            var sentenceCount = baRes.GetValueOrDefault("sentenceCount", 0);
+            var generalNounCount = baRes.GetValueOrDefault("generalNounCount", 0);
+            // Jeśli generalizacji jest co najwyżej 10 razy mniej niż zdań to spróbuj je usunąć.
+            if (generalNounCount / sentenceCount > 0.1)
+            {
+                List<string> sentences = new List<string>(text.Split("."));
+                List<string> outputSentences = new List<string>();
+                for (var i = 0; i < sentences.Count - 1; i++)
+                {
+                    var sentence = sentences[i].Trim();
+                    List<string> splitSentence = new List<string>(sentence.Split(" "));
+                    // Jeśli zdanie posiada generalizacje
+                    if (splitSentence.Where(e => Vocabulary.generalNouns.Contains(e)).Count() > 0)
+                    {
+                        var nextSentence = sentences[i + 1].Trim();
+                        List<string> splitNextSentence = new List<string>(nextSentence.Split(" "));
+                        if (splitNextSentence.Count < 5)
+                        {
+                            outputSentences.Add(sentence);
+                            continue;
+                        }
+
+                        bool hasIs = splitNextSentence[2] == "was" || splitNextSentence[2] == "is";
+                        bool hasA = splitNextSentence[3] == "a" || splitNextSentence[3] == "an";
+                        var unGeneralized = splitSentence.Where(e => Vocabulary.generalNouns.Contains(e)).Where(e => {
+                            if (Vocabulary.generalizations.TryGetValue(splitNextSentence[4], out (string, string) value))
+                            {
+                                return value.Item2 == e;
+                            }
+
+                            return false;
+                        });
+
+                        if (splitNextSentence.Count == 5 && hasIs && hasA && unGeneralized.Count() > 0)
+                        {
+                            var newSentence = sentence;
+                            foreach (var a in unGeneralized)
+                            {
+                                newSentence = newSentence.Replace(a, splitNextSentence[4]);
+                            }
+                            outputSentences.Add(newSentence);
+                            i++;
+                        }
+                        else
+                        {
+                            outputSentences.Add(sentence);
+                        }
+                    }
+                    else
+                    {
+                        outputSentences.Add(sentence);
+                    }
+
+                }
+                var texts = outputSentences.Select(s => s.Trim()).Where(s => s != "").Select(s => Vocabulary.capitalize(s)).ToArray();
+                text = string.Join(". ", texts) + ".";
+            }
+
             // Zapisz deobfuskowany tekst
             deobfDoc = @"<FlowDocument xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
 xmlns:local=""clr-namespace:AnalyzerObfuscator.test_documents""

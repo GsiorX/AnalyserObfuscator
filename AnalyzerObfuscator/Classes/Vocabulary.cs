@@ -93,6 +93,16 @@ namespace AnalyzerObfuscator
             "eat",
         };
 
+        public static readonly List<string> generalNouns = new List<string>
+        {
+            "animal",
+            "person",
+            "object",
+            "place",
+            "creature",
+
+        };
+
         public static readonly IDictionary<string, (string, string)> generalizations = new Dictionary<string, (string, string)>() {
             { "dog", ("an", "animal") },
             { "cat", ("an", "animal") },
