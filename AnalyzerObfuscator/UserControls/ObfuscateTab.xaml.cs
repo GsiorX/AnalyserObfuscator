@@ -45,10 +45,10 @@ namespace AnalyzerObfuscator
 
                 Dictionary<string, double> options = new Dictionary<string, double>();
 
-                if (addObf.IsChecked == true) options.Add("and", double.Parse(andProb.Text));
+                if (addObf.IsChecked == true) options.Add("and", Helpers.ParseDouble(andProb.Text));
                 if (passiveObf.IsChecked == true) options.Add("pas", 0);
-                if (synonymObf.IsChecked == true) options.Add("syn", double.Parse(synProb.Text));
-                if (generalizationObf.IsChecked == true) options.Add("gen", double.Parse(genProb.Text));
+                if (synonymObf.IsChecked == true) options.Add("syn", Helpers.ParseDouble(synProb.Text));
+                if (generalizationObf.IsChecked == true) options.Add("gen", Helpers.ParseDouble(genProb.Text));
 
                 ObfuscationResultWindow resultWindow = new ObfuscationResultWindow(document, options);
                 resultWindow.Show();
@@ -95,7 +95,7 @@ namespace AnalyzerObfuscator
             double andProbability, synProbability, genProbability;
             if (addObf.IsChecked == true)
             {
-                if (!double.TryParse(andProb.Text, out andProbability))
+                if (!Helpers.CheckDouble(andProb.Text, out andProbability))
                 {
                     MessageBox.Show("And probability must be a number");
                     return false;
@@ -110,7 +110,7 @@ namespace AnalyzerObfuscator
 
             if (generalizationObf.IsChecked == true)
             {
-                if (!double.TryParse(genProb.Text, out genProbability))
+                if (!Helpers.CheckDouble(genProb.Text, out genProbability))
                 {
                     MessageBox.Show("Generalization probability must be a number");
                     return false;
@@ -125,7 +125,7 @@ namespace AnalyzerObfuscator
 
             if (synonymObf.IsChecked == true)
             {
-                if (!double.TryParse(synProb.Text, out synProbability))
+                if (!Helpers.CheckDouble(synProb.Text, out synProbability))
                 {
                     MessageBox.Show("Synonym probability must be a number");
                     return false;
