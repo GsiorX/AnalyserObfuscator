@@ -31,6 +31,7 @@ namespace AnalyzerObfuscator
         public static double ParseDouble(string text)
         {
             text = text.Replace(',', '.');
+
             double.TryParse(text, NumberStyles.Any, CultureInfo.InvariantCulture, out double value);
             return value;
         }
